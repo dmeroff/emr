@@ -19,6 +19,8 @@ class m160507_145617_init extends Migration
         $this->dropTable('patient');
         $this->dropTable('organization');
         $this->dropTable('biosignal');
+        $this->dropTable('test');
+        $this->dropTable('patient_to_doctor');
 
         $this->execute('SET FOREIGN_KEY_CHECKS=1;');
     }

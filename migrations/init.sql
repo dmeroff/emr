@@ -25,7 +25,7 @@ ENGINE = InnoDB;
 -- Table `user_token`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `user_token` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `user_id` INT(11) NOT NULL,
   `code` VARCHAR(32) NOT NULL COMMENT 'Код',
   `created_at` DATETIME NOT NULL COMMENT 'Время создания',
@@ -44,7 +44,7 @@ ENGINE = InnoDB;
 -- Table `user_invite`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `user_invite` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `referrer_id` INT NULL COMMENT 'ID приглашенного',
   `referral_id` INT NULL COMMENT 'ID пригласившего',
   `email` VARCHAR(255) NOT NULL,
@@ -73,7 +73,7 @@ COMMENT = '	';
 -- Table `organization`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `organization` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `owner_id` INT NOT NULL,
   `code` VARCHAR(45) NULL COMMENT 'Код',
   `name` VARCHAR(255) NULL COMMENT 'Название организации',
@@ -97,7 +97,7 @@ ENGINE = InnoDB;
 -- Table `patient`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `patient` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `organization_id` INT NOT NULL COMMENT 'ID организации',
   `user_id` INT NOT NULL COMMENT 'ID пользователя',
   `is_unknown` TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'Неизвестный',
@@ -129,7 +129,7 @@ ENGINE = InnoDB;
 -- Table `biosignal`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `biosignal` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `patient_id` INT NOT NULL COMMENT 'ID пациента',
   `data` LONGBLOB NOT NULL COMMENT 'Данные биосигнала',
   `created_at` DATETIME NOT NULL COMMENT 'Время создания',
@@ -141,41 +141,6 @@ CREATE TABLE IF NOT EXISTS `biosignal` (
     ON DELETE CASCADE
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `patient_archive`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `patient_archive` (
-  `id` INT NOT NULL,
-  `revision` INT NOT NULL,
-  `revision_time` DATETIME NOT NULL,
-  `owner_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
-  `is_unknown` TINYINT(1) NOT NULL DEFAULT 1,
-  `snils` VARCHAR(12) NULL,
-  `inn` VARCHAR(12) NULL,
-  `name` VARCHAR(255) NULL,
-  `patronymic` VARCHAR(255) NULL,
-  `surname` VARCHAR(255) NULL,
-  `birthday` DATE NULL,
-  `birthplace` TEXT NULL,
-  `gender` TINYINT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_patient_owner_idx` (`owner_id` ASC),
-  INDEX `fk_patient_user_idx` (`user_id` ASC),
-  CONSTRAINT `fk_patient_owner`
-    FOREIGN KEY (`owner_id`)
-    REFERENCES `organization` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_patient_user`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `patient_to_doctor`
@@ -202,7 +167,7 @@ ENGINE = InnoDB;
 -- Table `test`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `test` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `patient_id` INT NOT NULL,
   `data` TEXT NOT NULL,
   PRIMARY KEY (`id`),
