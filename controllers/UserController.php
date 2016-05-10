@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\User;
 use yii\helpers\Url;
+use yii\filters\VerbFilter;
 use yii\web\ServerErrorHttpException;
 
 /**
@@ -13,6 +14,21 @@ use yii\web\ServerErrorHttpException;
  */
 class UserController extends RestController
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbFilter' => [
+                'class'   => VerbFilter::class,
+                'actions' => [
+                    'create' => ['post'],
+                ],
+            ],
+        ];
+    }
+    
     /**
      * Creates new user.
      */

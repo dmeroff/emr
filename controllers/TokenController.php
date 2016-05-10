@@ -3,6 +3,10 @@
 namespace app\controllers;
 
 use app\forms\LoginForm;
+use app\models\UserToken;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\VerbFilter;
 use yii\web\ServerErrorHttpException;
 
 /**
@@ -12,6 +16,29 @@ use yii\web\ServerErrorHttpException;
  */
 class TokenController extends RestController
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'authenticator' => [
+                'class'       => CompositeAuth::class,
+                'only'        => ['delete'],
+                'authMethods' => [
+                    HttpBasicAuth::class,
+                ],
+            ],
+            'verbFilter' => [
+                'class'   => VerbFilter::class,
+                'actions' => [
+                    'create' => ['post'],
+                    'delete' => ['delete'],
+                ],
+            ],
+        ];
+    }
+
     /**
      * Creates new auth token.
      */
@@ -31,5 +58,18 @@ class TokenController extends RestController
         } else {
             throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
         }
+    }
+
+    /**
+     * Deletes current user auth token.
+     */
+    public function actionDelete()
+    {
+        \Yii::$app->response->setStatusCode(204);
+
+        UserToken::deleteAll([
+            'user_id' => \Yii::$app->user->id,
+            'code'    => \Yii::$app->request->getAuthUser(),
+        ]);
     }
 }

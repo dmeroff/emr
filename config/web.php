@@ -6,6 +6,9 @@ $config = [
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
     'components' => [
+        'user' => [
+            'identityClass' => 'app\models\User',
+        ],
         'request' => [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
@@ -32,7 +35,9 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user', 'only' => ['create']],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'token', 'only' => ['create']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'token', 'only' => ['create', 'delete'], 'patterns' => [
+                    'DELETE' => 'delete',
+                ]],
             ],
         ],
     ],
