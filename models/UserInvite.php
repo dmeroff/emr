@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\query\UserInviteQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "user_invite".
@@ -21,6 +22,35 @@ use yii\db\ActiveRecord;
 class UserInvite extends ActiveRecord
 {
     /**
+     * Creates new invite and sends it via email.
+     */
+    public function create() : bool
+    {
+        if (!$this->save()) {
+            return false;
+        }
+
+        \Yii::$app->mailer->compose('invite', ['userInvite' => $this])
+            ->setTo($this->email)
+            ->setSubject('Приглашение в систему')
+            ->setFrom(\Yii::$app->params['adminEmail'])
+            ->send();
+
+        return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $this->code       = random_int(1000000000, 9999999999);
+        $this->created_at = new Expression('NOW()');
+
+        return parent::beforeSave($insert);
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getReferral()
@@ -34,6 +64,18 @@ class UserInvite extends ActiveRecord
     public function getReferrer()
     {
         return $this->hasOne(User::className(), ['id' => 'referrer_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            ['email', 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+        ];
     }
 
     /**

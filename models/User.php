@@ -20,6 +20,10 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    const ROLE_PATIENT = 'patient';
+    const ROLE_DOCTOR  = 'doctor';
+    const ROLE_CHIEF   = 'chief';
+    
     /**
      * @inheritdoc
      */

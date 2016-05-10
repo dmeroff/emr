@@ -46,7 +46,16 @@ class UserInviteQuery extends ActiveQuery
     {
         return $this->andWhere(['code' => $code]);
     }
-    
+
+    /**
+     * @param  string $email
+     * @return UserInviteQuery
+     */
+    public function byEmail(string $email) : UserInviteQuery
+    {
+        return $this->andWhere(['email' => $email]);
+    }
+
     /**
      * @inheritdoc
      * @return \app\models\UserInvite[]|array
