@@ -32,6 +32,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user', 'only' => ['create']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'token', 'only' => ['create']],
             ],
         ],
     ],

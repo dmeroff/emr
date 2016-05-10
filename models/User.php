@@ -56,8 +56,29 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey)
+    public function validateAuthKey($authKey) : bool
     {
+        return false;
+    }
+
+    /**
+     * Validates password and rehashes it if needed.
+     * 
+     * @param  string $password
+     * @return bool
+     */
+    public function validatePassword(string $password) : bool
+    {
+        if (password_verify($password, $this->password_hash)) {
+            if (password_needs_rehash($this->password_hash, PASSWORD_DEFAULT)) {
+                $this->updateAttributes([
+                    'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+                ]);
+            }
+            
+            return true;
+        }
+
         return false;
     }
 
