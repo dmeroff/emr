@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use app\query\UserQuery;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -13,6 +14,7 @@ use yii\web\IdentityInterface;
  * @property string  $password_hash
  * @property string  $created_at
  * @property string  $recovery_code
+ * @property string  $authToken
  *
  * @property Organization[] $organizations
  * @property Patient        $patient
@@ -23,7 +25,17 @@ class User extends ActiveRecord implements IdentityInterface
     const ROLE_PATIENT = 'patient';
     const ROLE_DOCTOR  = 'doctor';
     const ROLE_CHIEF   = 'chief';
-    
+
+    /**
+     * @var string
+     */
+    public $inviteCode;
+
+    /**
+     * @var string
+     */
+    public $password;
+
     /**
      * @inheritdoc
      */
@@ -46,6 +58,82 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return false;
+    }
+
+    /**
+     * Creates new auth token for this user.
+     *
+     * @return string
+     */
+    public function getAuthToken() : string
+    {
+        return (new UserToken(['user_id' => $this->id]))->create();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules() : array
+    {
+        return [
+            [['email', 'inviteCode'], 'trim'],
+            [['email', 'inviteCode', 'password'], 'required', 'message' => '{attribute} не может быть пустым'],
+            ['email', 'email', 'message' => 'Некорректный формат Email адреса'],
+            ['email', 'unique', 'message' => 'Email уже используется'],
+            ['password', 'string', 'min' => 6, 'max' => 72,
+                'tooShort' => 'Пароль не может быть короче 6 символов',
+                'tooLong' => 'Пароль не может быть длиннее 72 символов'],
+            ['inviteCode', 'validateInviteCode'],
+        ];
+    }
+
+    /**
+     * Checks invite code.
+     * @param $attribute
+     */
+    public function validateInviteCode(string $attribute)
+    {
+        $invite = UserInvite::find()->byCode($this->inviteCode)->byEmail($this->email)->one();
+
+        if ($invite === null) {
+            $this->addError($attribute, 'Некорректный инвайт код');
+        }
+    }
+
+    /**
+     * Registers user and sends welcome message to email.
+     *
+     * @return bool
+     */
+    public function register() : bool
+    {
+        $transaction = $this->getDb()->beginTransaction();
+
+        try {
+            if (!$this->validate()) {
+                return false;
+            }
+            
+            $this->save(false);
+
+            \Yii::$app->mailer->compose('register', ['user' => $this])
+                ->setTo($this->email)
+                ->setSubject('Регистрация в системе')
+                ->setFrom(\Yii::$app->params['adminEmail'])
+                ->send();
+
+            UserInvite::deleteAll(['code' => $this->inviteCode, 'email' => $this->email]);
+
+            $transaction->commit();
+            
+            return true;
+        } catch (\Throwable $e) {
+            \Yii::error($e);
+            
+            $transaction->rollBack();
+            
+            return false;
+        } 
     }
 
     /**
@@ -75,15 +163,6 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [
@@ -92,6 +171,8 @@ class User extends ActiveRecord implements IdentityInterface
             'password_hash' => 'Хэш пароля',
             'created_at'    => 'Время создания',
             'recovery_code' => 'Код восстановления пароля',
+            'password'      => 'Пароль',
+            'inviteCode'    => 'Инвайт код',
         ];
     }
 

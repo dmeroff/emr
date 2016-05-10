@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\query\UserTokenQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "user_token".
@@ -22,6 +23,29 @@ class UserToken extends ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * Saves the model and returns code.
+     * 
+     * @return string
+     */
+    public function create() : string
+    {
+        $this->save();
+        
+        return $this->code;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $this->code       = \Yii::$app->security->generateRandomString();
+        $this->created_at = new Expression('NOW()');
+        
+        return parent::beforeSave($insert);
     }
 
     /**
