@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\query\UserQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\web\IdentityInterface;
 
 /**
@@ -134,6 +135,22 @@ class User extends ActiveRecord implements IdentityInterface
             
             return false;
         } 
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if ($this->password != null) {
+            $this->password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+        }
+
+        if ($this->isNewRecord) {
+            $this->created_at = new Expression('NOW()');
+        }
+
+        return parent::beforeSave($insert);
     }
 
     /**
