@@ -30,8 +30,10 @@ class Fixture extends Module
      */
     public function _before(TestCase $testcase)
     {
+        \Yii::$app->db->createCommand('SET FOREIGN_KEY_CHECKS=0;')->execute();
         $this->unloadFixtures();
         $this->loadFixtures();
+        \Yii::$app->db->createCommand('SET FOREIGN_KEY_CHECKS=1;')->execute();
         parent::_before($testcase);
     }
 
@@ -40,7 +42,9 @@ class Fixture extends Module
      */
     public function _after(TestCase $testcase)
     {
+        \Yii::$app->db->createCommand('SET FOREIGN_KEY_CHECKS=0;')->execute();
         $this->unloadFixtures();
+        \Yii::$app->db->createCommand('SET FOREIGN_KEY_CHECKS=1;')->execute();
         parent::_after($testcase);
     }
 
