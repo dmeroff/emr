@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use app\models\Organization;
-use yii\helpers\Url;
 use yii\filters\VerbFilter;
 use yii\web\ServerErrorHttpException;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
-use yii\data\ActiveDataProvider;
 
 class OrganizationController extends RestController
 {
-
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -27,7 +27,7 @@ class OrganizationController extends RestController
                 'class'   => VerbFilter::class,
                 'actions' => [
                     'create' => ['post'],
-                    'view'   => ['view'],
+                    'view'   => ['get'],
                 ],
             ],
         ];
@@ -44,8 +44,7 @@ class OrganizationController extends RestController
 
         if ($model->create()) {
             \Yii::$app->response->setStatusCode(201);
-            //\Yii::$app->response->getHeaders()->set('Location', Url::to(['view', 'address' => $model->address], true));
-
+            return null;
         } elseif ($model->hasErrors()) {
             \Yii::$app->response->setStatusCode(422);
             return ['errors' => $model->getErrors()];
@@ -57,11 +56,8 @@ class OrganizationController extends RestController
     /**
      * Get information about organization
      */
-    public function actionView()
+    public function actionIndex()
     {
-        $model = Organization::find()->byOwnerId(\Yii::$app->user->id)->one();
-
-        return $model;
-
+        return Organization::find()->byOwnerId(\Yii::$app->user->id)->one();
     }
 }
