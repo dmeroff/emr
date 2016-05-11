@@ -6,7 +6,8 @@
         "php": ">=7.0.0",
         "yiisoft/yii2": ">=2.0.8",
         "yiisoft/yii2-swiftmailer": "*",
-        "dmstr/yii2-migrate-command": "^0.3.1"
+        "dmstr/yii2-migrate-command": "^0.3.1",
+        "codeception/verify": "^0.3.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
