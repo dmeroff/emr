@@ -35,6 +35,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user', 'only' => ['create']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'invite', 'only' => ['create', 'view', 'index']],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'token', 'only' => ['create', 'delete'], 'patterns' => [
                     'DELETE' => 'delete',
                 ]],

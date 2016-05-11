@@ -21,6 +21,27 @@ use yii\db\Expression;
  */
 class UserInvite extends ActiveRecord
 {
+    const SCENARIO_ADMIN   = 'admin';
+    const SCENARIO_DEFAULT = 'default';
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        unset($fields['code']);
+        unset($fields['referrer_id']);
+        unset($fields['referral_id']);
+
+        $fields['registered'] = function (UserInvite $model) {
+            return $model->referral_id !== null;
+        };
+
+        return $fields;
+    }
+
     /**
      * Creates new invite and sends it via email.
      */
@@ -67,14 +88,31 @@ class UserInvite extends ActiveRecord
     }
 
     /**
-     * @return array
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_ADMIN   => ['email'],
+            self::SCENARIO_DEFAULT => ['email', 'role'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
      */
     public function rules()
     {
         return [
             ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
+            ['email', 'required', 'message' => '{attribute} не может быть пустым '],
+            ['email', 'email', 'message' => 'Некорректный формат Email адреса'],
+            ['email', 'unique', 'targetClass' => User::class,
+                'message' => 'Email уже используется другим пользователем'],
+            ['email', 'unique', 'message' => 'Пользователь с таким Email уже приглашен'],
+            ['role', 'required', 'on' => [self::SCENARIO_DEFAULT], 'message' => 'Роль не может быть пустой'],
+            ['role', 'in', 'range' => [User::ROLE_DOCTOR, User::ROLE_PATIENT],
+                'message' => 'Вы не можете приглашать пользователей с такой ролью'],
         ];
     }
 
