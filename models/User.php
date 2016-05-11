@@ -38,6 +38,11 @@ class User extends ActiveRecord implements IdentityInterface
     public $password;
 
     /**
+     * @var UserInvite
+     */
+    private $userInvite;
+
+    /**
      * @inheritdoc
      */
     public function getId()
@@ -115,9 +120,9 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validateInviteCode(string $attribute)
     {
-        $invite = UserInvite::find()->byCode($this->inviteCode)->byEmail($this->email)->one();
+        $this->userInvite = UserInvite::find()->byCode($this->inviteCode)->byEmail($this->email)->one();
 
-        if ($invite === null) {
+        if ($this->userInvite === null) {
             $this->addError($attribute, 'Некорректный инвайт код');
         }
     }
@@ -144,7 +149,7 @@ class User extends ActiveRecord implements IdentityInterface
                 ->setFrom(\Yii::$app->params['adminEmail'])
                 ->send();
 
-            UserInvite::deleteAll(['code' => $this->inviteCode, 'email' => $this->email]);
+            $this->userInvite->updateAttributes(['referral_id' => $this->id]);
 
             $transaction->commit();
             
