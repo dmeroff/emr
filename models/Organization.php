@@ -4,16 +4,27 @@ namespace app\models;
 
 use app\query\OrganizationQuery;
 use yii\db\ActiveRecord;
-use yii\db\Expression;
 
-
+/**
+ * @property int    $id
+ * @property int    $owner_id
+ * @property string $code
+ * @property string $name
+ * @property string $address
+ * @property string $attestat_number
+ * @property string $chief_name
+ * @property string $chief_position_name
+ * @property string $chief_phone
+ * @property string $chief_email
+ *
+ * @author Daniil Ilin <dilin@gmail.com>
+ * @author Dmitry Erofeev <dmeroff@gmail.com>
+ */
 class Organization extends ActiveRecord
 {
-    public function getId()
-    {
-        return $this->id;
-    }
-
+    /**
+     * @return array
+     */
     public function rules() : array
     {
         return [
@@ -35,6 +46,11 @@ class Organization extends ActiveRecord
         ];
     }
 
+    /**
+     * Creates new organization
+     * @return bool
+     * @throws \yii\db\Exception
+     */
     public function create() : bool
     {
         $transaction = $this->getDb()->beginTransaction();
@@ -43,7 +59,6 @@ class Organization extends ActiveRecord
             if (!$this->validate()) {
                 return false;
             }
-
 
             $this->owner_id = \Yii::$app->user->id;
 
@@ -61,38 +76,38 @@ class Organization extends ActiveRecord
         }
     }
 
-
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
-            'id'                    => 'ID',
-            'owner_id'              => 'ID владельца',
-            'code'                  => 'Код организации',
-            'name'                  => 'Имя организации',
-            'address'               => 'Адрес',
-            'attestat_number'       => 'Номер аттестата',
-            'chief_name'            => 'Имя руководителя',
-            'chief_position_name'   => 'Должность руководителя',
-            'chief_phone'           => 'Номер телефона руководителя',
-            'chief_email'           => 'Email',
+            'id'                  => 'ID',
+            'owner_id'            => 'ID владельца',
+            'code'                => 'Код организации',
+            'name'                => 'Имя организации',
+            'address'             => 'Адрес',
+            'attestat_number'     => 'Номер аттестата',
+            'chief_name'          => 'Имя руководителя',
+            'chief_position_name' => 'Должность руководителя',
+            'chief_phone'         => 'Номер телефона руководителя',
+            'chief_email'         => 'Email',
         ];
     }
 
-
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'organization';
     }
 
-
-    public static function findIdentity($id)
-    {
-        return static::findOne($id);
-    }
-
+    /**
+     * @inheritdoc
+     */
     public static function find()
     {
         return new OrganizationQuery(get_called_class());
     }
-
 }
