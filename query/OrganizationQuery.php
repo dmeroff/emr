@@ -1,7 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dilin
- * Date: 11.05.16
- * Time: 21:34
- */
+
+namespace app\query;
+
+use yii\db\ActiveQuery;
+
+class OrganizationQuery extends ActiveQuery
+{
+    public function byOwnerId(int $id) : OrganizationQuery
+    {
+        return $this->andWhere(['owner_id' => $id]);
+    }
+}

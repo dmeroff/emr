@@ -38,6 +38,7 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'token', 'only' => ['create', 'delete'], 'patterns' => [
                     'DELETE' => 'delete',
                 ]],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'organization', 'only' => ['create', 'view']],
             ],
         ],
     ],
