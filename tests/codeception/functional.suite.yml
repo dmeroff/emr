@@ -14,7 +14,7 @@ modules:
         - \Helper\Fixture
         - REST:
             depends: PhpBrowser
-            url: 'http://localhost:8000/index-test.php/'
+            url: 'http://localhost:8080/index-test.php/'
     config:
         Yii2:
             configFile: 'codeception/config/functional.php'

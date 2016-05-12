@@ -7,13 +7,13 @@ use Faker\Factory;
 
 class InviteCest
 {
-    public function testCreate(FunctionalTester $I)
+    public function testInviteCreate(FunctionalTester $I)
     {
         $faker = Factory::create();
         $email = $faker->email;
+        $token = $I->getTokenFixture('doctor_auth_token')->code;
 
-        $I->getTokenFixture('user_auth_token')->code;
-        $I->amHttpAuthenticated($I->getTokenFixture('user_auth_token')->code, '');
+        $I->amHttpAuthenticated($token, '');
         $I->sendPOST('invites', ['email' => $email, 'role' => User::ROLE_PATIENT]);
 
         // verify that invite is created

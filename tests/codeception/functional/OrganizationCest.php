@@ -5,13 +5,13 @@ use Faker\Factory;
 
 class OrganizationCest
 {
-    public function testCreate(FunctionalTester $I)
+    public function testOrganizationCreate(FunctionalTester $I)
     {
         $faker = Factory::create();
         $email = $faker->email;
+        $token = $I->getTokenFixture('chief1_auth_token')->code;
 
-        $I->getTokenFixture('user_auth_token')->code;
-        $I->amHttpAuthenticated($I->getTokenFixture('user_auth_token')->code, '');
+        $I->amHttpAuthenticated($token, '');
         $I->sendPOST('organizations', [
             'code'                => '123456',
             'name'                => 'Имя организации',
