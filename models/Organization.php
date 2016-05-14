@@ -47,6 +47,18 @@ class Organization extends ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        unset($fields['owner_id']);
+
+        return $fields;
+    }
+
+    /**
      * Creates new organization
      * @return bool
      * @throws \yii\db\Exception
@@ -110,4 +122,5 @@ class Organization extends ActiveRecord
     {
         return new OrganizationQuery(get_called_class());
     }
+
 }
