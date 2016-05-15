@@ -6,9 +6,6 @@ $config = [
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
     'components' => [
-        'user' => [
-            'identityClass' => 'app\models\User',
-        ],
         'request' => [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',

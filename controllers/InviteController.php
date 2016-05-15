@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\UserInvite;
+use app\rbac\Permissions;
+use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\ServerErrorHttpException;
@@ -27,6 +29,15 @@ class InviteController extends RestController
                 'class'       => CompositeAuth::class,
                 'authMethods' => [
                     HttpBasicAuth::class,
+                ],
+            ],
+            'accessControl' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [Permissions::INVITE_USERS]
+                    ],
                 ],
             ],
             'verbFilter' => [

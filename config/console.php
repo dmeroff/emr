@@ -9,6 +9,9 @@ $config = [
         'migrate' => [
             'class' => 'dmstr\console\controllers\MigrateController',
         ],
+        'rbac' => [
+            'class' => 'app\commands\RbacController',
+        ],
     ],
     'components' => [
         'log' => [

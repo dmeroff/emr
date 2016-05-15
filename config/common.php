@@ -9,6 +9,10 @@ $params = ArrayHelper::merge(
 
 return [
     'components' => [
+        'user' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\models\User',
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

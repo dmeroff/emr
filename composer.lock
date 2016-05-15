@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f0edb1629bb316a34c02554ff6da3a88",
-    "content-hash": "a32f12b71bdac52068022ed40ebcdb7b",
+    "hash": "2ab03c635f614b73e868c17f72619a76",
+    "content-hash": "507fc387792d871939b52afdf85d2fcd",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -322,6 +322,49 @@
                 "html"
             ],
             "time": "2015-08-05 01:03:42"
+        },
+        {
+            "name": "rmrevin/yii2-rbac-command",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-rbac-command.git",
+                "reference": "48d5fe92e0567094cd27c7640e39a5dd3f28901f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-rbac-command/zipball/48d5fe92e0567094cd27c7640e39a5dd3f28901f",
+                "reference": "48d5fe92e0567094cd27c7640e39a5dd3f28901f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\rbac\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Revin",
+                    "email": "xgismox@gmail.com",
+                    "homepage": "http://rmrevin.ru/"
+                }
+            ],
+            "description": "Extension for RBAC rules update for Yii2",
+            "keywords": [
+                "command",
+                "rbac",
+                "yii"
+            ],
+            "time": "2015-12-23 09:10:50"
         },
         {
             "name": "swiftmailer/swiftmailer",

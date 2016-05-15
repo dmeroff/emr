@@ -7,7 +7,8 @@
         "yiisoft/yii2": ">=2.0.8",
         "yiisoft/yii2-swiftmailer": "*",
         "dmstr/yii2-migrate-command": "^0.3.1",
-        "codeception/verify": "^0.3.0"
+        "codeception/verify": "^0.3.0",
+        "rmrevin/yii2-rbac-command": "^1.4"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
