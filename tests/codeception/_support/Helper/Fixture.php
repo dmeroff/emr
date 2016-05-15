@@ -2,6 +2,7 @@
 
 namespace Helper;
 
+use app\tests\codeception\_fixtures\InviteFixture;
 use Codeception\Module;
 use Codeception\TestCase;
 use app\tests\codeception\_fixtures\UserTokenFixture;
@@ -56,6 +57,7 @@ class Fixture extends Module
         return [
             'user'       => UserFixture::className(),
             'user_token' => UserTokenFixture::className(),
+            'invite'     => InviteFixture::className(),
         ];
     }
 

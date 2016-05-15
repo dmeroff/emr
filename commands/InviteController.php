@@ -38,9 +38,10 @@ class InviteController extends Controller
 
         /** @var UserInvite $newInvite */
         $newInvite = \Yii::createObject([
-            'class' => UserInvite::class,
-            'email' => $email,
-            'role'  => User::ROLE_CHIEF,
+            'class'    => UserInvite::class,
+            'email'    => $email,
+            'role'     => User::ROLE_CHIEF,
+            'scenario' => UserInvite::SCENARIO_ADMIN,
         ]);
 
         if ($newInvite->create()) {

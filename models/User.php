@@ -151,6 +151,9 @@ class User extends ActiveRecord implements IdentityInterface
 
             $this->userInvite->updateAttributes(['referral_id' => $this->id]);
 
+            $role = \Yii::$app->authManager->getRole($this->userInvite->role);
+            \Yii::$app->authManager->assign($role, $this->id);
+
             $transaction->commit();
             
             return true;

@@ -2,6 +2,7 @@
 
 namespace app\tests\codeception\_fixtures;
 
+use app\models\User;
 use yii\test\ActiveFixture;
 
 /**
@@ -14,4 +15,23 @@ class UserFixture extends ActiveFixture
      * @var string
      */
     public $modelClass = 'app\models\User';
+
+    /**
+     * @inheritdoc
+     */
+    public function load()
+    {
+        parent::load();
+
+        \Yii::$app->authManager->removeAllAssignments();
+
+        $patient = \Yii::$app->authManager->getRole(User::ROLE_PATIENT);
+        $doctor  = \Yii::$app->authManager->getRole(User::ROLE_DOCTOR);
+        $chief   = \Yii::$app->authManager->getRole(User::ROLE_CHIEF);
+
+        \Yii::$app->authManager->assign($patient, 1);
+        \Yii::$app->authManager->assign($doctor, 2);
+        \Yii::$app->authManager->assign($chief, 3);
+        \Yii::$app->authManager->assign($chief, 4);
+    }
 }

@@ -9,15 +9,16 @@ class InviteCest
 {
     public function testInviteCreate(FunctionalTester $I)
     {
-        $faker = Factory::create();
-        $email = $faker->email;
-        $token = $I->getTokenFixture('doctor_auth_token')->code;
+        $faker  = Factory::create();
+        $email  = $faker->email;
+        $token  = $I->getTokenFixture('doctor_auth_token')->code;
+        $doctor = $I->getUserFixture('doctor');
 
         $I->amHttpAuthenticated($token, '');
         $I->sendPOST('invites', ['email' => $email, 'role' => User::ROLE_PATIENT]);
 
         // verify that invite is created
-        $invite = UserInvite::find()->byEmail($email)->byReferrerId(1)->one();
+        $invite = UserInvite::find()->byEmail($email)->byReferrerId($doctor->id)->one();
         verify($invite)->notNull();
 
         // verify that response contains invite code

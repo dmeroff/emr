@@ -57,6 +57,7 @@ class InviteController extends RestController
     {
         $model = new UserInvite([
             'referrer_id' => \Yii::$app->user->id,
+            'scenario'    => UserInvite::SCENARIO_DEFAULT, 
         ]);
 
         $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
