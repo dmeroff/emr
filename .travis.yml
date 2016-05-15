@@ -1,0 +1,23 @@
+language: php
+
+php:
+  - '7.0'
+
+# faster builds on new travis setup not using sudo
+sudo: false
+
+# install dependencies
+install:
+  - travis_retry composer self-update
+  - travis_retry composer global require codeception/codeception
+  - travis_retry composer global require fxp/composer-asset-plugin
+  - travis_retry composer install --prefer-dist
+
+before_script:
+  - mysql -e 'create database emr_test;'
+  - php init --env=Development --overwrite=n
+  - cd tests
+  - php codeception/bin/yii migrate/up --interactive=0
+  - ~/.composer/vendor/bin/codecept build
+
+script: ~/.composer/vendor/bin/codecept run
