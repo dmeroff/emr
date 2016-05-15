@@ -16,6 +16,8 @@ install:
 before_script:
   - mysql -e 'create database emr_test;'
   - php init.php --env=Development --overwrite=n
+  - cd web
+  - php -S localhost:8080 &> /dev/null &
   - cd tests
   - php codeception/bin/yii rbac/update
   - php codeception/bin/yii migrate/up --interactive=0
