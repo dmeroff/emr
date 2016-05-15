@@ -3,12 +3,20 @@
 namespace app\controllers;
 
 use app\models\Organization;
+use app\rbac\Permissions;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\web\ServerErrorHttpException;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 
+/**
+ * Controller for managing organizations.
+ *
+ * @author Daniil Ilin    <daniil.ilin@gmail.com>
+ * @author Dmitry Erofeev <dmeroff@gmail.com>
+ */
 class OrganizationController extends RestController
 {
     /**
@@ -19,9 +27,17 @@ class OrganizationController extends RestController
         return [
             'authenticator' => [
                 'class'       => CompositeAuth::class,
-                'only'        => ['create', 'index', 'update', 'view'],
                 'authMethods' => [
                     HttpBasicAuth::class,
+                ],
+            ],
+            'accessControl' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [Permissions::MANAGE_ORGANIZATIONS],
+                    ],
                 ],
             ],
             'verbFilter' => [

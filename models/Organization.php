@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * @property string $chief_phone
  * @property string $chief_email
  *
- * @author Daniil Ilin <dilin@gmail.com>
+ * @author Daniil Ilin    <daniil.ilin@gmail.com>
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
 class Organization extends ActiveRecord

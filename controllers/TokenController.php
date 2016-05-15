@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\forms\LoginForm;
 use app\models\UserToken;
+use yii\filters\AccessControl;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\VerbFilter;
@@ -29,6 +30,21 @@ class TokenController extends RestController
                     HttpBasicAuth::class,
                 ],
             ],
+            'accessControl' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow'   => true,
+                        'actions' => ['create'],
+                        'roles'   => ['?'],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['delete'],
+                        'roles'   => ['@'],
+                    ],
+                ],
+            ],
             'verbFilter' => [
                 'class'   => VerbFilter::class,
                 'actions' => [
@@ -50,7 +66,6 @@ class TokenController extends RestController
 
         if ($model->authenticate()) {
             \Yii::$app->response->setStatusCode(201);
-
             return $model->authToken;
         } elseif ($model->hasErrors()) {
             \Yii::$app->response->setStatusCode(422);

@@ -42,6 +42,7 @@ class RbacController extends Command
     {
         return [
             RbacFactory::Permission(Permissions::INVITE_USERS),
+            RbacFactory::Permission(Permissions::MANAGE_ORGANIZATIONS),
         ];
     }
 
@@ -66,6 +67,9 @@ class RbacController extends Command
     protected function inheritancePermissions()
     {
         return [
+            User::ROLE_CHIEF => [
+                Permissions::MANAGE_ORGANIZATIONS,
+            ],
             User::ROLE_DOCTOR => [
                 Permissions::INVITE_USERS,
             ],

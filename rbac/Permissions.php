@@ -13,4 +13,9 @@ class Permissions
      * Can invite users.
      */
     const INVITE_USERS = 'inviteUsers';
+
+    /**
+     * Can manage organizations (create, update, view).
+     */
+    const MANAGE_ORGANIZATIONS = 'manageOrganizations';
 }

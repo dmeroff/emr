@@ -64,7 +64,6 @@ class InviteController extends RestController
         if ($model->create()) {
             \Yii::$app->response->setStatusCode(201);
             \Yii::$app->response->getHeaders()->set('Location', Url::to(['view', 'id' => $model->id], true));
-
             return $model->code;
         } elseif ($model->hasErrors()) {
             \Yii::$app->response->setStatusCode(422);
