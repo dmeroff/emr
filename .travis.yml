@@ -18,7 +18,7 @@ before_script:
   - php init.php --env=Development --overwrite=n
   - cd web
   - php -S localhost:8080 &> /dev/null &
-  - cd tests
+  - cd ../tests
   - php codeception/bin/yii rbac/update
   - php codeception/bin/yii migrate/up --interactive=0
   - ~/.composer/vendor/bin/codecept build
