@@ -10,6 +10,7 @@ class OrganizationCest
         $faker = Factory::create();
         $email = $faker->email;
         $token = $I->getTokenFixture('chief1_auth_token')->code;
+        $chief = $I->getUserFixture('chief1');
 
         $I->amHttpAuthenticated($token, '');
         $I->sendPOST('organizations', [
@@ -24,7 +25,7 @@ class OrganizationCest
         ]);
 
         // verify that invite is created
-        $organization = Organization::find()->byOwnerId(1)->one();
+        $organization = Organization::find()->byOwnerId($chief->id)->one();
         verify($organization)->notNull();
 
         // verify that response contains invite code
