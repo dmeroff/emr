@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\User;
+use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\filters\VerbFilter;
 use yii\web\ServerErrorHttpException;
@@ -20,6 +21,15 @@ class UserController extends RestController
     public function behaviors()
     {
         return [
+            'accessControl' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                ],
+            ],
             'verbFilter' => [
                 'class'   => VerbFilter::class,
                 'actions' => [
@@ -30,7 +40,14 @@ class UserController extends RestController
     }
     
     /**
-     * Creates new user.
+     * @api {post} /users Create new user
+     * @apiDescription Creates new user and returns authentication token
+     * @apiParam {String} email User's email
+     * @apiParam {String} password User's password
+     * @apiParam {String} inviteCode User's invite code
+     * @apiName CreateUser
+     * @apiPermission Guest
+     * @apiSuccess (200) {String} Authentication token for created user
      */
     public function actionCreate()
     {
@@ -40,8 +57,6 @@ class UserController extends RestController
 
         if ($model->register()) {
             \Yii::$app->response->setStatusCode(201);
-            \Yii::$app->response->getHeaders()->set('Location', Url::to(['view', 'id' => $model->id], true));
-
             return $model->authToken;
         } elseif ($model->hasErrors()) {
             \Yii::$app->response->setStatusCode(422);
