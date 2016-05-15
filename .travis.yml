@@ -23,4 +23,4 @@ before_script:
   - php codeception/bin/yii migrate/up --interactive=0
   - ~/.composer/vendor/bin/codecept build
 
-script: ~/.composer/vendor/bin/codecept run
+script: ~/.composer/vendor/bin/codecept run --debug -vvv
