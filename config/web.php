@@ -37,7 +37,7 @@ $config = [
                     'DELETE' => 'delete',
                     'POST'   => 'create',
                 ]],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'organization', 'only' => ['create', 'index']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'organization', 'only' => ['create', 'index', 'update', 'view']],
             ],
         ],
     ],
