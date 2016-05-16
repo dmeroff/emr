@@ -1,6 +1,5 @@
 <?php
 
-
 use app\models\User;
 use app\models\UserInvite;
 use Faker\Factory;

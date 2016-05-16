@@ -30,6 +30,15 @@ class UserQuery extends ActiveQuery
     }
 
     /**
+     * @param  string $code
+     * @return UserQuery
+     */
+    public function byRecoveryCode(string $code) : UserQuery
+    {
+        return $this->andWhere(['recovery_code' => $code]);
+    }
+
+    /**
      * @inheritdoc
      * @return \app\models\User[]|array
      */
