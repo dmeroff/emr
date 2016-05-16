@@ -3,6 +3,7 @@
 namespace Helper;
 
 use app\tests\codeception\_fixtures\InviteFixture;
+use app\tests\codeception\_fixtures\PatientFixture;
 use Codeception\Module;
 use Codeception\TestCase;
 use app\tests\codeception\_fixtures\UserTokenFixture;
@@ -58,6 +59,7 @@ class Fixture extends Module
             'user'       => UserFixture::className(),
             'user_token' => UserTokenFixture::className(),
             'invite'     => InviteFixture::className(),
+            'patient'    => PatientFixture::className(),
         ];
     }
 
@@ -79,5 +81,15 @@ class Fixture extends Module
     public function getTokenFixture($name)
     {
         return $this->getFixture('user_token')->getModel($name);
+    }
+
+    /**
+     * @param  string $name
+     * @return \app\models\UserInvite
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getInviteFixture($name)
+    {
+        return $this->getFixture('invite')->getModel($name);
     }
 }

@@ -154,6 +154,12 @@ class User extends ActiveRecord implements IdentityInterface
             $role = \Yii::$app->authManager->getRole($this->userInvite->role);
             \Yii::$app->authManager->assign($role, $this->id);
 
+            switch ($this->userInvite->role) {
+                case self::ROLE_PATIENT:
+                    (new Patient())->link('user', $this);
+                    break;
+            }
+
             $transaction->commit();
             
             return true;
@@ -193,9 +199,9 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPatients()
+    public function getPatient()
     {
-        return $this->hasMany(Patient::className(), ['user_id' => 'id']);
+        return $this->hasOne(Patient::className(), ['user_id' => 'id']);
     }
 
     /**

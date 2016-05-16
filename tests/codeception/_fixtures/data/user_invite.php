@@ -13,4 +13,18 @@ return [
         'created_at' => new Expression('NOW()'),
         'role'       => User::ROLE_CHIEF,
     ],
+    'doctor_invite' => [
+        'email'       => $faker->email,
+        'code'        => '9876543210',
+        'created_at'  => new Expression('NOW()'),
+        'role'        => User::ROLE_DOCTOR,
+        'referrer_id' => 3,
+    ],
+    'patient_invite' => [
+        'email'       => $faker->email,
+        'code'        => '03324569877',
+        'created_at'  => new Expression('NOW()'),
+        'role'        => User::ROLE_PATIENT,
+        'referrer_id' => 2,
+    ],
 ];
