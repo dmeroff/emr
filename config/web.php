@@ -41,6 +41,15 @@ $config = [
                     'POST'   => 'create',
                 ]],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'organization', 'only' => ['create', 'index', 'update', 'view']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'organization-archive', 'only' => ['index', 'view'],
+                    'prefix' => '/revision/<revision:\\d+>',
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                    ],
+                    'patterns' => [
+                        'GET' => 'index',
+                        'GET {id}' => 'view',
+                    ]],
             ],
         ],
     ],
