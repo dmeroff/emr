@@ -50,6 +50,15 @@ $config = [
                         'GET' => 'index',
                         'GET {id}' => 'view',
                     ]],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'patient-archive', 'only' => ['index', 'view'],
+                    'prefix' => '/revision/<revision:\\d+>',
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                    ],
+                    'patterns' => [
+                        'GET' => 'index',
+                        'GET {id}' => 'view',
+                    ]],
             ],
         ],
     ],
