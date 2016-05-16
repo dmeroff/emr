@@ -157,6 +157,10 @@ class User extends ActiveRecord implements IdentityInterface
             switch ($this->userInvite->role) {
                 case self::ROLE_PATIENT:
                     (new Patient())->link('user', $this);
+                    \Yii::$app->db->createCommand()->insert('patient_to_doctor', [
+                        'patient_id' => $this->patient->id,
+                        'doctor_id'  => $this->userInvite->referrer_id,
+                    ])->execute();
                     break;
             }
 

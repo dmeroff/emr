@@ -2,6 +2,7 @@
 
 use app\models\User;
 use app\models\UserToken;
+use yii\db\Query;
 
 class RegistrationCest
 {
@@ -28,6 +29,7 @@ class RegistrationCest
 
     public function testPatientRegister(FunctionalTester $I)
     {
+        $doctor = $I->getUserFixture('doctor');
         $invite = $I->getInviteFixture('patient_invite');
 
         $I->sendPOST('users', [
@@ -46,5 +48,14 @@ class RegistrationCest
 
         $token = UserToken::find()->byUserId($user->id)->byCode($code)->one();
         verify($token)->notNull();
+        
+        $count = (new Query())
+            ->from('patient_to_doctor')
+            ->where([
+                'patient_id' => $user->patient->id,
+                'doctor_id'  => $doctor->id,
+            ])
+            ->count();
+        verify((int) $count)->equals(1);
     }
 }
