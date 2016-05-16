@@ -41,24 +41,10 @@ $config = [
                     'POST'   => 'create',
                 ]],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'organization', 'only' => ['create', 'index', 'update', 'view']],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'organization-archive', 'only' => ['index', 'view'],
-                    'prefix' => '/revision/<revision:\\d+>',
-                    'tokens' => [
-                        '{id}' => '<id:\\d+>',
-                    ],
-                    'patterns' => [
-                        'GET' => 'index',
-                        'GET {id}' => 'view',
-                    ]],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'patient-archive', 'only' => ['index', 'view'],
-                    'prefix' => '/revision/<revision:\\d+>',
-                    'tokens' => [
-                        '{id}' => '<id:\\d+>',
-                    ],
-                    'patterns' => [
-                        'GET' => 'index',
-                        'GET {id}' => 'view',
-                    ]],
+                'GET organization-archives' => 'organization-archive/index',
+                'GET organization-archives/<id:\d+>/revision/<revision:\d+>' => 'organization-archive/view',
+                'GET patient-archives' => 'patient-archive/index',
+                'GET patient-archives/<id:\d+>/revision/<revision:\d+>' => 'patient-archive/view',
             ],
         ],
     ],
