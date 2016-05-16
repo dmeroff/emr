@@ -9,6 +9,12 @@ use yii\web\ServerErrorHttpException;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 
+
+/**
+ * Controller for managing organizations.
+ *
+ * @author Daniil Ilin <daniil.ilin@gmail.com>
+ */
 class OrganizationController extends RestController
 {
     /**

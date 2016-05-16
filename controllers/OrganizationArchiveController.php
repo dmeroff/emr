@@ -8,7 +8,11 @@ use yii\filters\VerbFilter;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 
-
+/**
+ * Controller for managing archive organizations.
+ *
+ * @author Daniil Ilin <daniil.ilin@gmail.com>
+ */
 class OrganizationArchiveController extends RestController
 {
     /**

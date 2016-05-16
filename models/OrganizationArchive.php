@@ -21,7 +21,6 @@ use yii\db\ActiveRecord;
  * @property string $dt_datetime
  *
  * @author Daniil Ilin <dilin@gmail.com>
- * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
 class OrganizationArchive extends ActiveRecord
 {
