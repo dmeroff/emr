@@ -2,7 +2,9 @@
 
 namespace Helper;
 
+use app\tests\codeception\_fixtures\DoctorFixture;
 use app\tests\codeception\_fixtures\InviteFixture;
+use app\tests\codeception\_fixtures\OrganizationFixture;
 use app\tests\codeception\_fixtures\PatientFixture;
 use app\tests\codeception\_fixtures\TestFixture;
 use Codeception\Module;
@@ -57,11 +59,13 @@ class Fixture extends Module
     public function fixtures()
     {
         return [
-            'user'       => UserFixture::className(),
-            'user_token' => UserTokenFixture::className(),
-            'invite'     => InviteFixture::className(),
-            'patient'    => PatientFixture::className(),
-            'test'       => TestFixture::className(),
+            'user'         => UserFixture::className(),
+            'user_token'   => UserTokenFixture::className(),
+            'invite'       => InviteFixture::className(),
+            'patient'      => PatientFixture::className(),
+            'test'         => TestFixture::className(),
+            'organization' => OrganizationFixture::className(),
+            'doctor'       => DoctorFixture::className(),
         ];
     }
 

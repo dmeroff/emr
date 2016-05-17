@@ -17,8 +17,9 @@ use yii\web\IdentityInterface;
  * @property string  $recovery_code
  * @property string  $authToken
  *
- * @property Organization[] $organizations
+ * @property Organization   $organization
  * @property Patient        $patient
+ * @property Doctor         $doctor
  * @property UserInvite[]   $invites
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -159,8 +160,15 @@ class User extends ActiveRecord implements IdentityInterface
                     (new Patient())->link('user', $this);
                     \Yii::$app->db->createCommand()->insert('patient_to_doctor', [
                         'patient_id' => $this->patient->id,
-                        'doctor_id'  => $this->userInvite->referrer_id,
+                        'doctor_id'  => $this->userInvite->referrer->doctor->id,
                     ])->execute();
+                    break;
+                case self::ROLE_DOCTOR:
+                    $doctor = new Doctor([
+                        'user_id'         => $this->id,
+                        'organization_id' => $this->userInvite->referrer->organization->id,
+                    ]);
+                    $doctor->save();
                     break;
             }
 
@@ -195,9 +203,9 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrganizations()
+    public function getOrganization()
     {
-        return $this->hasMany(Organization::className(), ['owner_id' => 'id']);
+        return $this->hasOne(Organization::className(), ['owner_id' => 'id'])->orderBy(['id' => SORT_ASC]);
     }
 
     /**
@@ -205,7 +213,15 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getPatient()
     {
-        return $this->hasOne(Patient::className(), ['user_id' => 'id']);
+        return $this->hasOne(Patient::className(), ['user_id' => 'id'])->orderBy(['id' => SORT_ASC]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDoctor()
+    {
+        return $this->hasOne(Doctor::className(), ['user_id' => 'id'])->orderBy(['id' => SORT_ASC]);
     }
 
     /**
