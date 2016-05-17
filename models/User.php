@@ -156,6 +156,10 @@ class User extends ActiveRecord implements IdentityInterface
             \Yii::$app->authManager->assign($role, $this->id);
 
             switch ($this->userInvite->role) {
+                case self::ROLE_CHIEF:
+                    $organization = new Organization(['owner_id' => $this->id]);
+                    $organization->save(false);
+                    break;
                 case self::ROLE_PATIENT:
                     (new Patient())->link('user', $this);
                     \Yii::$app->db->createCommand()->insert('patient_to_doctor', [
@@ -168,7 +172,7 @@ class User extends ActiveRecord implements IdentityInterface
                         'user_id'         => $this->id,
                         'organization_id' => $this->userInvite->referrer->organization->id,
                     ]);
-                    $doctor->save();
+                    $doctor->save(false);
                     break;
             }
 
