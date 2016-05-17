@@ -39,6 +39,7 @@ class PatientController extends RestController
                     'index'  => ['get'],
                     'update' => ['put'],
                     'view'   => ['get'],
+                    'delete' => ['delete'],
                 ],
             ],
         ];
@@ -97,5 +98,19 @@ class PatientController extends RestController
         }
 
         return $model;
+    }
+
+    /**
+     * Detach patient from doctor
+     * @param $id
+     * @throws \yii\db\Exception
+     */
+    public function actionDelete($id)
+    {
+        \Yii::$app->response->setStatusCode(204);
+
+        \Yii::$app->db->createCommand()
+            ->delete('patient_to_doctor', ['patient_id' => $id, 'doctor_id' => \Yii::$app->user->identity->doctor->id])
+            ->execute();
     }
 }
