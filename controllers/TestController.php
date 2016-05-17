@@ -59,15 +59,13 @@ class TestController extends RestController
      */
     public function actionCreate()
     {
-        $model = new Test(['patient_id' => \Yii::$app->user->identity->patient->id]);
-        $model->data = \Yii::$app->getRequest()->getBodyParams();
+        $model = new Test([
+            'data' => \Yii::$app->getRequest()->getBodyParams(),
+        ]);
 
         if ($model->save()) {
             \Yii::$app->response->setStatusCode(201);
             return null;
-        } elseif ($model->hasErrors()) {
-            \Yii::$app->response->setStatusCode(422);
-            return ['errors' => $model->getErrors()];
         } else {
             throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
         }
