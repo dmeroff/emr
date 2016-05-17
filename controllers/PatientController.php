@@ -78,7 +78,7 @@ class PatientController extends RestController
      */
     public function actionIndex()
     {
-        return Patient::find()->all();
+        return Patient::find()->byDoctorId(\Yii::$app->user->id)->all();
     }
 
 

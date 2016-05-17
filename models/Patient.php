@@ -50,36 +50,6 @@ class Patient extends ActiveRecord
 
 
     /**
-     * Creates new patient
-     * @return bool
-     * @throws \yii\db\Exception
-     */
-    public function create() : bool
-    {
-        $transaction = $this->getDb()->beginTransaction();
-
-        try {
-            if (!$this->validate()) {
-                return false;
-            }
-
-            $this->doctor_id = \Yii::$app->user->id;
-
-            $this->save(false);
-
-            $transaction->commit();
-
-            return true;
-        } catch (\Throwable $e) {
-            \Yii::error($e);
-
-            $transaction->rollBack();
-
-            return false;
-        }
-    }
-
-    /**
      * @return \yii\db\ActiveQuery
      */
     public function getBiosignals()
