@@ -43,7 +43,7 @@ $config = [
                     'POST'          => 'create',
                     'GET,HEAD'      => 'index',
                 ]],
-
+                'POST biosignals' => 'biosignal/create',
                 'POST recovery' => 'recovery/request',
                 'PUT user/password' => 'recovery/recover',
                 'GET organization-archives' => 'organization-archive/index',
