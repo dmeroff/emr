@@ -4,6 +4,7 @@ namespace Helper;
 
 use app\tests\codeception\_fixtures\InviteFixture;
 use app\tests\codeception\_fixtures\PatientFixture;
+use app\tests\codeception\_fixtures\TestFixture;
 use Codeception\Module;
 use Codeception\TestCase;
 use app\tests\codeception\_fixtures\UserTokenFixture;
@@ -60,6 +61,7 @@ class Fixture extends Module
             'user_token' => UserTokenFixture::className(),
             'invite'     => InviteFixture::className(),
             'patient'    => PatientFixture::className(),
+            'test'       => TestFixture::className(),
         ];
     }
 

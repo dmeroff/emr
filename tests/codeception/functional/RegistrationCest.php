@@ -56,6 +56,6 @@ class RegistrationCest
                 'doctor_id'  => $doctor->id,
             ])
             ->count();
-        verify((int) $count)->equals(1);
+        verify((int) $count)->greaterThan(0);
     }
 }
