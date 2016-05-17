@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\query\TestQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\helpers\Json;
 
 /**
@@ -12,6 +13,7 @@ use yii\helpers\Json;
  * @property integer $id
  * @property integer $patient_id
  * @property string  $data
+ * @property string  $created_at
  * @property array   $decodedData
  * @property Patient $patient
  */
@@ -48,7 +50,8 @@ class Test extends ActiveRecord
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {
-            $this->data = Json::encode($this->data);
+            $this->created_at = new Expression('NOW()');
+            $this->data       = Json::encode($this->data);
         }
         
         return parent::beforeSave($insert);

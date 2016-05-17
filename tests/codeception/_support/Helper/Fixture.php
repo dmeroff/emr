@@ -11,6 +11,7 @@ use Codeception\Module;
 use Codeception\TestCase;
 use app\tests\codeception\_fixtures\UserTokenFixture;
 use app\tests\codeception\_fixtures\UserFixture;
+use tests\codeception\_fixtures\BaseFixture;
 use yii\test\FixtureTrait;
 use yii\test\BaseActiveFixture;
 
@@ -66,6 +67,7 @@ class Fixture extends Module
             'test'         => TestFixture::className(),
             'organization' => OrganizationFixture::className(),
             'doctor'       => DoctorFixture::className(),
+            'base'         => BaseFixture::className(),
         ];
     }
 

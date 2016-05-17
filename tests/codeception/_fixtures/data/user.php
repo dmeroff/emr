@@ -31,4 +31,10 @@ return [
         'password_hash' => $hash,
         'created_at'    => new Expression('NOW()'),
     ],
+    'patient2' => [
+        'id'            => 5,
+        'email'         => $faker->email,
+        'password_hash' => $hash,
+        'created_at'    => new Expression('NOW()'),
+    ],
 ];

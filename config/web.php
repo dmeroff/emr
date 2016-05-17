@@ -38,7 +38,12 @@ $config = [
                     'POST'   => 'create',
                 ]],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'organization', 'only' => ['create', 'index', 'update', 'view']],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'test', 'only' => ['create']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'test', 'only' => ['create', 'index'], 'patterns' => [
+                    'GET,HEAD {id}' => 'index',
+                    'POST'          => 'create',
+                    'GET,HEAD'      => 'index',
+                ]],
+
                 'POST recovery' => 'recovery/request',
                 'PUT user/password' => 'recovery/recover',
                 'GET organization-archives' => 'organization-archive/index',

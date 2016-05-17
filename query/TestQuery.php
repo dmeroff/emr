@@ -19,6 +19,17 @@ class TestQuery extends ActiveQuery
     {
         return $this->andWhere(['id' => $id]);
     }
+
+    /**
+     * @param  int $doctorId
+     * @return TestQuery
+     */
+    public function byDoctorId(int $doctorId) : TestQuery
+    {
+        return $this
+            ->innerJoin(['ptd' => 'patient_to_doctor'], 'ptd.patient_id = test.patient_id')
+            ->andWhere(['ptd.doctor_id' => $doctorId]);
+    }
     
     /**
      * @param  int $id
@@ -26,7 +37,7 @@ class TestQuery extends ActiveQuery
      */
     public function byPatientId(int $id) : TestQuery
     {
-        return $this->andWhere(['patient_id' => $id]);
+        return $this->andWhere(['test.patient_id' => $id]);
     }
 
     /**
