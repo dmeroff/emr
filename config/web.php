@@ -44,6 +44,7 @@ $config = [
                 'GET organization-archives/<id:\d+>/revision/<revision:\d+>' => 'organization-archive/view',
                 'GET patient-archives' => 'patient-archive/index',
                 'GET patient-archives/<id:\d+>/revision/<revision:\d+>' => 'patient-archive/view',
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'patient', 'only' => ['index', 'update', 'view']],
             ],
         ],
     ],
