@@ -48,6 +48,7 @@ class Patient extends ActiveRecord
         ];
     }
 
+
     /**
      * @return \yii\db\ActiveQuery
      */
