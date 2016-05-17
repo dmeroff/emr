@@ -30,6 +30,17 @@ class PatientQuery extends ActiveQuery
     }
 
     /**
+     * @param  int $doctorId
+     * @return PatientQuery
+     */
+    public function byDoctorId(int $doctorId) : PatientQuery
+    {
+        return $this
+            ->innerJoin(['ptd' => 'patient_to_doctor'], 'ptd.patient_id = patient.id')
+            ->andWhere(['ptd.doctor_id' => $doctorId]);
+    }
+
+    /**
      * @param  int $id
      * @return PatientQuery
      */
