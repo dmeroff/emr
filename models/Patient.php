@@ -27,6 +27,30 @@ use yii\db\ActiveRecord;
  */
 class Patient extends ActiveRecord
 {
+
+    /**
+     * @return array
+     */
+    public function rules() : array
+    {
+        return [
+            ['is_unknown', 'boolean'],
+            ['snils', 'string', 'max' => 12,
+                'tooLong' => 'Снилс не может быть длиннее 12 символов'],
+            ['inn', 'string', 'max' => 12,
+                'tooLong' => 'ИНН не может быть длиннее 12 символов'],
+            ['name', 'string', 'max' => 255,
+                'tooLong' => 'Имя не может быть длиннее 255 символов'],
+            ['patronymic', 'string', 'max' => 255,
+                'tooLong' => 'Отчество не может быть длиннее 255 символов'],
+            ['surname', 'string', 'max' => 255,
+                'tooLong' => 'Фамилия не может быть длиннее 255 символов'],
+            ['birthday', 'date','format' => 'php:Y-m-d'],
+            ['gender', 'boolean'],
+
+        ];
+    }
+
     /**
      * @inheritdoc
      */

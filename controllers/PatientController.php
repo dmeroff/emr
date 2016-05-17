@@ -54,7 +54,7 @@ class PatientController extends RestController
      */
     public function actionUpdate($id)
     {
-        $model = Patient::find()->byId($id)->byDoctorId(\Yii::$app->user->id)->one();
+        $model = Patient::find()->byId($id)->byDoctorId(\Yii::$app->user->identity->doctor->id)->one();
 
         if ($model == null) {
             throw new NotFoundHttpException();
@@ -78,7 +78,7 @@ class PatientController extends RestController
      */
     public function actionIndex()
     {
-        return Patient::find()->byDoctorId(\Yii::$app->user->id)->all();
+        return Patient::find()->byDoctorId(\Yii::$app->user->identity->doctor->id)->all();
     }
 
 
@@ -90,7 +90,7 @@ class PatientController extends RestController
      */
     public function  actionView($id)
     {
-        $model = Patient::find()->byId($id)->byDoctorId(\Yii::$app->user->id)->one();
+        $model = Patient::find()->byId($id)->byDoctorId(\Yii::$app->user->identity->doctor->id)->one();
 
         if ($model == null) {
             throw new NotFoundHttpException();
