@@ -2,20 +2,22 @@
 
 namespace app\controllers;
 
-use app\models\Test;
+use app\models\Biosignal;
 use app\models\User;
+use yii\web\BadRequestHttpException;
 use yii\web\ServerErrorHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
+use yii\web\UploadedFile;
 
 /**
- * Controller for uploading test results.
- * 
+ * Biosignal controller.
+ *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class TestController extends RestController
+class BiosignalController extends RestController
 {
     /**
      * @return array
@@ -37,31 +39,30 @@ class TestController extends RestController
                         'actions' => ['create'],
                         'roles'   => [User::ROLE_PATIENT],
                     ],
-                    [
-                        'allow'   => true,
-                        'actions' => ['index'],
-                        'roles'   => [User::ROLE_DOCTOR],
-                    ],
                 ],
             ],
             'verbFilter' => [
                 'class'   => VerbFilter::class,
                 'actions' => [
                     'create' => ['post'],
-                    'index'  => ['get'],
                 ],
             ],
         ];
     }
 
     /**
-     * Creates new test model.
+     * Creates new biosignal model
      */
     public function actionCreate()
     {
-        $model = new Test([
-            'data' => \Yii::$app->getRequest()->getBodyParams(),
-        ]);
+        $model = new Biosignal();
+        $file  = UploadedFile::getInstanceByName('data');
+        
+        if (!($file instanceof UploadedFile)) {
+            throw new BadRequestHttpException();
+        }
+        
+        $model->data = file_get_contents($file->tempName);
 
         if ($model->save()) {
             \Yii::$app->response->setStatusCode(201);
@@ -69,21 +70,5 @@ class TestController extends RestController
         } else {
             throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
         }
-    }
-
-    /**
-     * Shows all tests.
-     * @param  int $id
-     * @return array
-     */
-    public function actionIndex($id = null)
-    {
-        $query = Test::find()->byDoctorId(\Yii::$app->user->identity->doctor->id);
-        
-        if ($id !== null) {
-            $query->byPatientId($id);
-        }
-        
-        return $query->all();
     }
 }
