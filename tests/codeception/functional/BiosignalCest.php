@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Biosignal;
+use app\modules\emr\models\Biosignal;
 
 class BiosignalCest
 {

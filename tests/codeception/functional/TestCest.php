@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Test;
+use app\modules\emr\models\Test;
 use yii\helpers\Json;
 
 class TestCest

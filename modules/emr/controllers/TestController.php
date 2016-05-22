@@ -1,8 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\emr\controllers;
 
-use app\models\Test;
+use app\controllers\RestController;
+use app\modules\emr\models\Test;
 use app\modules\user\models\User;
 use yii\web\ServerErrorHttpException;
 use yii\filters\AccessControl;

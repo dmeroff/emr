@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\emr\EmrModule;
 use app\modules\user\UserModule;
 
 $config = [
@@ -9,6 +10,7 @@ $config = [
     'language' => 'ru-RU',
     'modules' => [
         'user' => UserModule::class,
+        'emr'  => EmrModule::class,
     ],
     'components' => [
         'request' => [
@@ -45,14 +47,17 @@ $config = [
                 'GET invites/<id:\d+>' => 'user/invite/view',
                 'POST recovery' => 'user/recovery/request',
                 'PUT user/password' => 'user/recovery/recover',
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'test', 'only' => ['create', 'index'], 'patterns' => [
-                    'GET,HEAD {id}' => 'index',
-                    'POST'          => 'create',
-                    'GET,HEAD'      => 'index',
-                ]],
+                'POST tests' => 'emr/test/create',
+                'GET tests' => 'emr/test/index',
+                'GET tests/<id:\d+>' => 'emr/test/index',
+                'POST biosignals' => 'emr/biosignal/create',
+                'GET patients' => 'emr/patient/index',
+                'GET patients/<id:\d+>' => 'emr/patient/view',
+                'PUT patients/<id:\d+>' => 'emr/patient/update',
+                'DELETE patients/<id:\d+>' => 'emr/patient/delete',
+
                 'GET organizations' => 'organization/view',
                 'PUT organizations' => 'organization/update',
-                'POST biosignals' => 'biosignal/create',
                 'GET organization-archives' => 'organization-archive/index',
                 'GET organization-archives/<id:\d+>/revision/<revision:\d+>' => 'organization-archive/view',
                 'GET patient-archives' => 'patient-archive/index',

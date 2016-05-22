@@ -1,8 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\emr\controllers;
 
-use app\models\Biosignal;
+use app\controllers\RestController;
+use app\modules\emr\models\Biosignal;
 use app\modules\user\models\User;
 use yii\web\BadRequestHttpException;
 use yii\web\ServerErrorHttpException;

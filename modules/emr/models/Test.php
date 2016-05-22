@@ -1,8 +1,9 @@
 <?php
 
-namespace app\models;
+namespace app\modules\emr\models;
 
-use app\query\TestQuery;
+use app\modules\emr\models\Patient;
+use app\modules\emr\query\TestQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\Json;
@@ -60,7 +61,7 @@ class Test extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\query\TestQuery the active query used by this AR class.
+     * @return \app\modules\emr\query\TestQuery the active query used by this AR class.
      */
     public static function find()
     {

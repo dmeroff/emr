@@ -13,5 +13,5 @@ class TestFixture extends ActiveFixture
     /**
      * @var string
      */
-    public $modelClass = 'app\models\Test';
+    public $modelClass = 'app\modules\emr\models\Test';
 }

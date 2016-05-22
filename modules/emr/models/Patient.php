@@ -1,9 +1,12 @@
 <?php
 
-namespace app\models;
+namespace app\modules\emr\models;
 
+use app\models\Organization;
+use app\modules\emr\models\Test;
+use app\modules\emr\models\Biosignal;
 use app\modules\user\models\User;
-use app\query\PatientQuery;
+use app\modules\emr\query\PatientQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -108,7 +111,7 @@ class Patient extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\query\PatientQuery the active query used by this AR class.
+     * @return \app\modules\emr\query\PatientQuery the active query used by this AR class.
      */
     public static function find()
     {

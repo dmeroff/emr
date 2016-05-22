@@ -1,11 +1,11 @@
 <?php
 
-namespace app\query;
+namespace app\modules\emr\query;
 
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[\app\models\Patient]].
+ * This is the ActiveQuery class for [[\app\modules\emr\models\Patient]].
  *
  * @see \app\models\Patient
  */
@@ -51,7 +51,7 @@ class PatientQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\Patient[]|array
+     * @return \app\modules\emr\models\Patient[]|array
      */
     public function all($db = null)
     {
@@ -60,7 +60,7 @@ class PatientQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\Patient|array|null
+     * @return \app\modules\emr\models\Patient|array|null
      */
     public function one($db = null)
     {

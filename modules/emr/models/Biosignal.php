@@ -1,8 +1,9 @@
 <?php
 
-namespace app\models;
+namespace app\modules\emr\models;
 
-use app\query\BiosignalQuery;
+use app\modules\emr\models\Patient;
+use app\modules\emr\query\BiosignalQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
@@ -40,7 +41,7 @@ class Biosignal extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\query\BiosignalQuery the active query used by this AR class.
+     * @return \app\modules\emr\query\BiosignalQuery the active query used by this AR class.
      */
     public static function find()
     {

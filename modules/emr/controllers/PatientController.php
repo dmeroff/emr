@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\emr\controllers;
 
-use app\models\Patient;
+use app\controllers\RestController;
+use app\modules\emr\models\Patient;
 use app\modules\user\models\User;
-use app\rbac\Permissions;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;

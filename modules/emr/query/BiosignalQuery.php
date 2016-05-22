@@ -1,11 +1,11 @@
 <?php
 
-namespace app\query;
+namespace app\modules\emr\query;
 
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[\app\models\Biosignal]].
+ * This is the ActiveQuery class for [[\app\modules\emr\models\Biosignal]].
  *
  * @see \app\models\Biosignal
  */
@@ -42,7 +42,7 @@ class BiosignalQuery extends ActiveQuery
     
     /**
      * @inheritdoc
-     * @return \app\models\Biosignal[]|array
+     * @return \app\modules\emr\models\Biosignal[]|array
      */
     public function all($db = null)
     {
@@ -51,7 +51,7 @@ class BiosignalQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\Biosignal|array|null
+     * @return \app\modules\emr\models\Biosignal|array|null
      */
     public function one($db = null)
     {

@@ -1,11 +1,11 @@
 <?php
 
-namespace app\query;
+namespace app\modules\emr\query;
 
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[\app\models\Test]].
+ * This is the ActiveQuery class for [[\app\modules\emr\models\Test]].
  *
  * @see \app\models\Test
  */
@@ -42,7 +42,7 @@ class TestQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\Test[]|array
+     * @return \app\modules\emr\models\Test[]|array
      */
     public function all($db = null)
     {
@@ -51,7 +51,7 @@ class TestQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\Test|array|null
+     * @return \app\modules\emr\models\Test|array|null
      */
     public function one($db = null)
     {

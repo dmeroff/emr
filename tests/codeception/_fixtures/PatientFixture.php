@@ -13,5 +13,5 @@ class PatientFixture extends ActiveFixture
     /**
      * @var string
      */
-    public $modelClass = 'app\models\Patient';
+    public $modelClass = 'app\modules\emr\models\Patient';
 }

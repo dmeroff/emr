@@ -4,7 +4,7 @@ namespace app\modules\user\models;
 
 use app\models\Doctor;
 use app\models\Organization;
-use app\models\Patient;
+use app\modules\emr\models\Patient;
 use app\modules\user\models\UserInvite;
 use app\modules\user\models\UserToken;
 use app\modules\user\query\UserQuery;
@@ -23,7 +23,7 @@ use yii\web\IdentityInterface;
  * @property string  $authToken
  *
  * @property Organization   $organization
- * @property Patient        $patient
+ * @property \app\modules\emr\models\Patient        $patient
  * @property Doctor         $doctor
  * @property UserInvite[]   $invites
  */
