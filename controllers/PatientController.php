@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Patient;
+use app\models\User;
 use app\rbac\Permissions;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -42,6 +43,15 @@ class PatientController extends RestController
                     'delete' => ['delete'],
                 ],
             ],
+            'accessControl' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [User::ROLE_DOCTOR],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -62,6 +72,7 @@ class PatientController extends RestController
         }
 
         $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
+
         if ($model->save()) {
             \Yii::$app->response->setStatusCode(204);
             return null;
@@ -82,14 +93,13 @@ class PatientController extends RestController
         return Patient::find()->byDoctorId(\Yii::$app->user->identity->doctor->id)->all();
     }
 
-
     /**
      * Get information about patient
      * @param $id
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function  actionView($id)
+    public function actionView($id)
     {
         $model = Patient::find()->byId($id)->byDoctorId(\Yii::$app->user->identity->doctor->id)->one();
 
@@ -107,10 +117,10 @@ class PatientController extends RestController
      */
     public function actionDelete($id)
     {
-        \Yii::$app->response->setStatusCode(204);
-
         \Yii::$app->db->createCommand()
             ->delete('patient_to_doctor', ['patient_id' => $id, 'doctor_id' => \Yii::$app->user->identity->doctor->id])
             ->execute();
+
+        \Yii::$app->response->setStatusCode(204);
     }
 }
