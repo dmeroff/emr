@@ -1,8 +1,8 @@
 <?php
 
-namespace app\models;
+namespace app\modules\archive\models;
 
-use app\query\OrganizationArchiveQuery;
+use app\modules\archive\query\OrganizationArchiveQuery;
 use yii\db\ActiveRecord;
 
 /**

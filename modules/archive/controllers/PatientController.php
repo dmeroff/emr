@@ -1,8 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\archive\controllers;
 
-use app\models\PatientArchive;
+use app\controllers\RestController;
+use app\modules\archive\models\PatientArchive;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\auth\CompositeAuth;
@@ -13,7 +14,7 @@ use yii\filters\auth\HttpBasicAuth;
  *
  * @author Daniil Ilin <daniil.ilin@gmail.com>
  */
-class PatientArchiveController extends RestController
+class PatientController extends RestController
 {
     /**
      * @return array

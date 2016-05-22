@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\archive\ArchiveModule;
 use app\modules\emr\EmrModule;
 use app\modules\organization\OrganizationModule;
 use app\modules\user\UserModule;
@@ -13,6 +14,7 @@ $config = [
         'user'         => UserModule::class,
         'emr'          => EmrModule::class,
         'organization' => OrganizationModule::class,
+        'archive'      => ArchiveModule::class,
     ],
     'components' => [
         'request' => [
@@ -64,10 +66,11 @@ $config = [
                 'GET organizations' => 'organization/organization/view',
                 'PUT organizations' => 'organization/organization/update',
 
-                'GET organization-archives' => 'organization-archive/index',
-                'GET organization-archives/<id:\d+>/revision/<revision:\d+>' => 'organization-archive/view',
-                'GET patient-archives' => 'patient-archive/index',
-                'GET patient-archives/<id:\d+>/revision/<revision:\d+>' => 'patient-archive/view',
+                // archive module
+                'GET archive/organizations' => 'archive/organization/index',
+                'GET archive/organizations/<id:\d+>/revision/<revision:\d+>' => 'archive/organization/view',
+                'GET archive/patients' => 'archive/patient/index',
+                'GET archive/patients/<id:\d+>/revision/<revision:\d+>' => 'archive/patient/view',
             ],
         ],
     ],

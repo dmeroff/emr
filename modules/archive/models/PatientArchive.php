@@ -1,8 +1,8 @@
 <?php
 
-namespace app\models;
+namespace app\modules\archive\models;
 
-use app\query\PatientArchiveQuery;
+use app\modules\archive\query\PatientArchiveQuery;
 use yii\db\ActiveRecord;
 
 /**

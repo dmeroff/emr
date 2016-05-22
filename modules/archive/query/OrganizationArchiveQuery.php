@@ -1,10 +1,10 @@
 <?php
 
-namespace app\query;
+namespace app\modules\archive\query;
 
 use yii\db\ActiveQuery;
 /**
- * This is the ActiveQuery class for [[\app\models\OrganizationArchive].
+ * This is the ActiveQuery class for [[\app\modules\archive\models\OrganizationArchive].
  *
  * @see \app\models\OrganizationArchive
  */

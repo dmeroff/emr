@@ -1,8 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\archive\controllers;
 
-use app\models\OrganizationArchive;
+use app\controllers\RestController;
+use app\modules\archive\models\OrganizationArchive;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\auth\CompositeAuth;
@@ -13,7 +14,7 @@ use yii\filters\auth\HttpBasicAuth;
  *
  * @author Daniil Ilin <daniil.ilin@gmail.com>
  */
-class OrganizationArchiveController extends RestController
+class OrganizationController extends RestController
 {
     /**
      * @return array
