@@ -56,12 +56,53 @@ class PatientController extends RestController
     }
 
     /**
-     * Update patient
-     * @param $id
-     * @return array|null
-     * @throws NotFoundHttpException
-     * @throws ServerErrorHttpException
-     * @throws \yii\base\InvalidConfigException
+     * @api {put} /patients/{id} Update patient
+     * @apiVersion 1.0.0
+     * @apiGroup Patient
+     * @apiName  UpdatePatient
+     * @apiDescription Updates patient information
+     * @apiPermission Doctor
+     * @apiParam {String} [snils]      Patient's snils
+     * @apiParam {String} [inn]        Patient's inn
+     * @apiParam {String} [name]       Patient's name
+     * @apiParam {String} [patronymic] Patient's patronymic
+     * @apiParam {String} [surname]    Patient's surname
+     * @apiParam {String} [birthday]   Patient's birthday
+     * @apiParam {String} [birthplace] Patient's birthplace
+     * @apiParam {String} [gender]     Patient's gender
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 204 No Content
+     * @apiErrorExample {json} Validation Error:
+     *     HTTP/1.1 422 Unprocessable Entity
+     *     {
+     *         "errors": {
+     *             "snils": ["First error"]
+     *         }
+     *     }
+     * @apiErrorExample {json} Unauthorized
+     *      HTTP/1.1 401 Unauthorized
+     *      {
+     *          "name":"Unauthorized",
+     *          "message":"You are requesting with an invalid credential.",
+     *          "code":0,
+     *          "status":401
+     *      }
+     * @apiErrorExample {json} Forbidden
+     *      HTTP/1.1 403 Forbidden
+     *      {
+     *          "name":"Forbidden",
+     *          "message":"You are not allowed to perform this action.",
+     *          "code":0,
+     *          "status":403
+     *      }
+     * @apiErrorExample {json} Not found
+     *      HTTP/1.1 404 Not found
+     *      {
+     *          "name":"Not found",
+     *          "message":"Not found",
+     *          "code":0,
+     *          "status":404
+     *      }
      */
     public function actionUpdate($id)
     {
@@ -85,8 +126,54 @@ class PatientController extends RestController
     }
 
     /**
-     * Get list patients
-     * @return \app\models\Patient[]|array
+     * @api {get} /patients/{id} View all patients
+     * @apiVersion 1.0.0
+     * @apiGroup Patient
+     * @apiName  ViewAllPatients
+     * @apiDescription Shows all patients information
+     * @apiPermission Doctor
+     * @apiSuccessExample {json} Success-Response:
+     *      HTTP/1.1 200 OK
+     *      [
+     *          {
+     *              "id": 1,
+     *              "snils": "123-111-565 22",
+     *              "inn": "112263645489",
+     *              "name": "Petr",
+     *              "patronymic": "Petrovich,
+     *              "surname": "Petrov",
+     *              "birthday": "1995-01-01",
+     *              "birthplace": "Birth place",
+     *              "gender": 0,
+     *          },
+     *          {
+     *              "id": 2,
+     *              "snils": "123-111-565 22",
+     *              "inn": "112263645489",
+     *              "name": "Petr",
+     *              "patronymic": "Petrovich,
+     *              "surname": "Petrov",
+     *              "birthday": "1995-01-01",
+     *              "birthplace": "Birth place",
+     *              "gender": 0,
+     *          }
+     *      ]
+     * @apiErrorExample {json} Unauthorized
+     *      HTTP/1.1 401 Unauthorized
+     *      {
+     *          "name":"Unauthorized",
+     *          "message":"You are requesting with an invalid credential.",
+     *          "code":0,
+     *          "status":401
+     *      }
+     * @apiErrorExample {json} Forbidden
+     *      HTTP/1.1 403 Forbidden
+     *      {
+     *          "name":"Forbidden",
+     *          "message":"You are not allowed to perform this action.",
+     *          "code":0,
+     *          "status":403
+     *      }
      */
     public function actionIndex()
     {
@@ -94,10 +181,49 @@ class PatientController extends RestController
     }
 
     /**
-     * Get information about patient
-     * @param $id
-     * @return mixed
-     * @throws NotFoundHttpException
+     * @api {get} /patients/{id} View patient's information
+     * @apiVersion 1.0.0
+     * @apiGroup Patient
+     * @apiName  ViewPatient
+     * @apiDescription Shows patient information
+     * @apiPermission Doctor
+     * @apiSuccessExample {json} Success-Response:
+     *      HTTP/1.1 200 OK
+     *      {
+     *          "id": 1,
+     *          "snils": "123-111-565 22",
+     *          "inn": "112263645489",
+     *          "name": "Petr",
+     *          "patronymic": "Petrovich,
+     *          "surname": "Petrov",
+     *          "birthday": "1995-01-01",
+     *          "birthplace": "Birth place",
+     *          "gender": 0,
+     *      }
+     * @apiErrorExample {json} Unauthorized
+     *      HTTP/1.1 401 Unauthorized
+     *      {
+     *          "name":"Unauthorized",
+     *          "message":"You are requesting with an invalid credential.",
+     *          "code":0,
+     *          "status":401
+     *      }
+     * @apiErrorExample {json} Forbidden
+     *      HTTP/1.1 403 Forbidden
+     *      {
+     *          "name":"Forbidden",
+     *          "message":"You are not allowed to perform this action.",
+     *          "code":0,
+     *          "status":403
+     *      }
+     * @apiErrorExample {json} Not found
+     *      HTTP/1.1 404 Not found
+     *      {
+     *          "name":"Not found",
+     *          "message":"Not found",
+     *          "code":0,
+     *          "status":404
+     *      }
      */
     public function actionView($id)
     {

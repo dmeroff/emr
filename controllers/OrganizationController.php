@@ -137,8 +137,8 @@ class OrganizationController extends RestController
      *          "code":0,
      *          "status":403
      *      }
-     * @apiErrorExample {json} Forbidden
-     *      HTTP/1.1 403 Forbidden
+     * @apiErrorExample {json} Not found
+     *      HTTP/1.1 404 Not found
      *      {
      *          "name":"Not found",
      *          "message":"Not found",
