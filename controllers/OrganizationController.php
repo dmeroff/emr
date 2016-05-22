@@ -43,41 +43,11 @@ class OrganizationController extends RestController
             'verbFilter' => [
                 'class'   => VerbFilter::class,
                 'actions' => [
-                    'create' => ['post'],
                     'view'   => ['get'],
-                    'index'  => ['get'],
                     'update' => ['put']
                 ],
             ],
         ];
-    }
-
-    /**
-     * Creates new organization.
-     */
-    public function actionCreate()
-    {
-        $model = new Organization();
-
-        $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
-
-        if ($model->create()) {
-            \Yii::$app->response->setStatusCode(201);
-            return null;
-        } elseif ($model->hasErrors()) {
-            \Yii::$app->response->setStatusCode(422);
-            return ['errors' => $model->getErrors()];
-        } else {
-            throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
-        }
-    }
-
-    /**
-     * Get list organizations
-     */
-    public function actionIndex()
-    {
-        return Organization::find()->byOwnerId(\Yii::$app->user->id)->all();
     }
 
     /**
@@ -116,9 +86,9 @@ class OrganizationController extends RestController
      *          "status":403
      *      }
      */
-    public function actionView($id)
+    public function actionView()
     {
-        $model = Organization::find()->byId($id)->byOwnerId(\Yii::$app->user->id)->one();
+        $model = \Yii::$app->user->identity->organization;
 
         if ($model == null) {
             throw new NotFoundHttpException();
@@ -176,9 +146,9 @@ class OrganizationController extends RestController
      *          "status":404
      *      }
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
-        $model = Organization::find()->byId($id)->byOwnerId(\Yii::$app->user->id)->one();
+        $model = \Yii::$app->user->identity->organization;
 
         if ($model == null) {
             throw new NotFoundHttpException('Not found');

@@ -5,7 +5,7 @@ use Faker\Factory;
 
 class OrganizationCest
 {
-    public function testOrganizationCreate(FunctionalTester $I)
+    public function testOrganizationUpdate(FunctionalTester $I)
     {
         $faker = Factory::create();
         $email = $faker->email;
@@ -13,7 +13,7 @@ class OrganizationCest
         $chief = $I->getUserFixture('chief1');
 
         $I->amHttpAuthenticated($token, '');
-        $I->sendPOST('organizations', [
+        $I->sendPUT('organizations', [
             'code'                => '123456',
             'name'                => 'Имя организации',
             'address'             => 'Адрес',
@@ -29,7 +29,7 @@ class OrganizationCest
         verify($organization)->notNull();
 
         // verify that response contains invite code
-        $I->seeResponseCodeIs(201);
+        $I->seeResponseCodeIs(204);
         verify($I->grabResponse())->equals('');
     }
 }
