@@ -13,5 +13,5 @@ class DoctorFixture extends ActiveFixture
     /**
      * @var string
      */
-    public $modelClass = 'app\models\Doctor';
+    public $modelClass = 'app\modules\organization\models\Doctor';
 }

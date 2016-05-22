@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\emr\EmrModule;
+use app\modules\organization\OrganizationModule;
 use app\modules\user\UserModule;
 
 $config = [
@@ -9,8 +10,9 @@ $config = [
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
     'modules' => [
-        'user' => UserModule::class,
-        'emr'  => EmrModule::class,
+        'user'         => UserModule::class,
+        'emr'          => EmrModule::class,
+        'organization' => OrganizationModule::class,
     ],
     'components' => [
         'request' => [
@@ -47,6 +49,8 @@ $config = [
                 'GET invites/<id:\d+>' => 'user/invite/view',
                 'POST recovery' => 'user/recovery/request',
                 'PUT user/password' => 'user/recovery/recover',
+
+                // emr module
                 'POST tests' => 'emr/test/create',
                 'GET tests' => 'emr/test/index',
                 'GET tests/<id:\d+>' => 'emr/test/index',
@@ -56,13 +60,14 @@ $config = [
                 'PUT patients/<id:\d+>' => 'emr/patient/update',
                 'DELETE patients/<id:\d+>' => 'emr/patient/delete',
 
-                'GET organizations' => 'organization/view',
-                'PUT organizations' => 'organization/update',
+                // organization module
+                'GET organizations' => 'organization/organization/view',
+                'PUT organizations' => 'organization/organization/update',
+
                 'GET organization-archives' => 'organization-archive/index',
                 'GET organization-archives/<id:\d+>/revision/<revision:\d+>' => 'organization-archive/view',
                 'GET patient-archives' => 'patient-archive/index',
                 'GET patient-archives/<id:\d+>/revision/<revision:\d+>' => 'patient-archive/view',
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'patient', 'only' => ['index', 'update', 'view', 'delete']],
             ],
         ],
     ],

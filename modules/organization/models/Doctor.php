@@ -1,8 +1,8 @@
 <?php
 
-namespace app\models;
+namespace app\modules\organization\models;
 
-use app\query\DoctorQuery;
+use app\modules\organization\query\DoctorQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -19,7 +19,7 @@ class Doctor extends ActiveRecord
 {
     /**
      * @inheritdoc
-     * @return \app\query\DoctorQuery the active query used by this AR class.
+     * @return \app\modules\organization\query\DoctorQuery the active query used by this AR class.
      */
     public static function find()
     {

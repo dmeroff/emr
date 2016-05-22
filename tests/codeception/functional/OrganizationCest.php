@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Organization;
+use app\modules\organization\models\Organization;
 use Faker\Factory;
 
 class OrganizationCest

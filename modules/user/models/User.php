@@ -2,8 +2,8 @@
 
 namespace app\modules\user\models;
 
-use app\models\Doctor;
-use app\models\Organization;
+use app\modules\organization\models\Doctor;
+use app\modules\organization\models\Organization;
 use app\modules\emr\models\Patient;
 use app\modules\user\models\UserInvite;
 use app\modules\user\models\UserToken;
@@ -22,9 +22,9 @@ use yii\web\IdentityInterface;
  * @property string  $recovery_code
  * @property string  $authToken
  *
- * @property Organization   $organization
+ * @property \app\modules\organization\controllers\Organization   $organization
  * @property \app\modules\emr\models\Patient        $patient
- * @property Doctor         $doctor
+ * @property \app\modules\organization\controllers\\app\modules\organization\models\Doctor         $doctor
  * @property UserInvite[]   $invites
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -173,7 +173,7 @@ class User extends ActiveRecord implements IdentityInterface
                     ])->execute();
                     break;
                 case self::ROLE_DOCTOR:
-                    $doctor = new Doctor([
+                    $doctor = new \app\modules\organization\models\Doctor([
                         'user_id'         => $this->id,
                         'organization_id' => $this->userInvite->referrer->organization->id,
                     ]);
@@ -214,7 +214,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getOrganization()
     {
-        return $this->hasOne(Organization::className(), ['owner_id' => 'id'])->orderBy(['id' => SORT_ASC]);
+        return $this->hasOne(\app\modules\organization\models\Organization::className(), ['owner_id' => 'id'])->orderBy(['id' => SORT_ASC]);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace app\modules\emr\models;
 
-use app\models\Organization;
+use app\modules\organization\models\Organization;
 use app\modules\emr\models\Test;
 use app\modules\emr\models\Biosignal;
 use app\modules\user\models\User;
@@ -25,7 +25,7 @@ use yii\db\ActiveRecord;
  * @property string       $birthplace
  * @property integer      $gender
  * @property Biosignal[]  $biosignals
- * @property Organization $organization
+ * @property \app\modules\organization\models\Organization $organization
  * @property User         $user
  * @property Test[]       $tests
  */
@@ -90,7 +90,7 @@ class Patient extends ActiveRecord
      */
     public function getOrganization()
     {
-        return $this->hasOne(Organization::className(), ['id' => 'organization_id']);
+        return $this->hasOne(\app\modules\organization\models\Organization::className(), ['id' => 'organization_id']);
     }
 
     /**

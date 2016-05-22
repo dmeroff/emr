@@ -1,8 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\organization\controllers;
 
-use app\models\Organization;
+use app\controllers\RestController;
+use app\modules\organization\models\Organization;
 use app\rbac\Permissions;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

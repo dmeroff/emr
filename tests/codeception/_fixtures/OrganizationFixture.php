@@ -13,5 +13,5 @@ class OrganizationFixture extends ActiveFixture
     /**
      * @var string
      */
-    public $modelClass = 'app\models\Organization';
+    public $modelClass = 'app\modules\organization\models\Organization';
 }
