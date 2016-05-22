@@ -13,7 +13,7 @@ class RecoveryCest
 
         // request password recovery
         $I->sendPOST('recovery', ['email' => $patient->email]);
-        $I->seeResponseCodeIs(201);
+        $I->seeResponseCodeIs(204);
         $I->canSeeResponseEquals('');
 
         $patient->refresh();
