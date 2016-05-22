@@ -56,7 +56,27 @@ class TokenController extends RestController
     }
 
     /**
-     * Creates new auth token.
+     * @api {post} /tokens Create token
+     * @apiVersion 1.0.0
+     * @apiGroup Token
+     * @apiName  CreateToken
+     * @apiDescription Creates and returns new authentication token
+     * @apiParam {String} email      User's email
+     * @apiParam {String} password   User's password
+     * @apiPermission Guest
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 201 Created
+     *     {
+     *       "token": "f6asd54f98asd74f6vs6df54sdfg"
+     *     }
+     * @apiErrorExample {json} Validation Error:
+     *     HTTP/1.1 422 Unprocessable Entity
+     *     {
+     *         "errors": {
+     *             "email": ["First error"],
+     *             "password": ["First error"]
+     *         }
+     *     }
      */
     public function actionCreate()
     {
@@ -76,7 +96,14 @@ class TokenController extends RestController
     }
 
     /**
-     * Deletes current user auth token.
+     * @api {delete} /tokens Delete token
+     * @apiVersion 1.0.0
+     * @apiGroup Token
+     * @apiName  DeleteToken
+     * @apiDescription Deletes current user's authentication token.
+     * @apiPermission Authenticated user
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 204 No content
      */
     public function actionDelete()
     {

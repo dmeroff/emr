@@ -51,7 +51,23 @@ class BiosignalController extends RestController
     }
 
     /**
-     * Creates new biosignal model
+     * @api {post} /biosignals Upload biosignal
+     * @apiVersion 1.0.0
+     * @apiGroup Biosignal
+     * @apiName  CreateBiosignal
+     * @apiDescription Uploads biosignal binary data
+     * @apiParam {Binary} data Biosignal binary data
+     * @apiPermission Patient
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 201 Created
+     * @apiErrorExample {json} Unauthorized
+     *      HTTP/1.1 401 Unauthorized
+     *      {
+     *          "name":"Unauthorized",
+     *          "message":"You are requesting with an invalid credential.",
+     *          "code":0,
+     *          "status":401
+     *      }
      */
     public function actionCreate()
     {

@@ -1,0 +1,9 @@
+{
+  "name": "Electronic Medical Record",
+  "version": "1.0.0",
+  "description": "Electronic Medical Record",
+  "title": "Electronic Medical Record",
+  "template": {
+    "forceLanguage": "en"
+  }
+}

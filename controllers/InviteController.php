@@ -51,7 +51,41 @@ class InviteController extends RestController
     }
 
     /**
-     * Creates new user invite.
+     * @api {post} /invites Create invite
+     * @apiVersion 1.0.0
+     * @apiGroup Invite
+     * @apiName  CreateInvite
+     * @apiDescription Creates new invite code and returns it
+     * @apiParam {String} email User's email
+     * @apiPermission Doctor|Chief
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 201 Created
+     *     {
+     *       "code": "f6asd54f98asd74f6vs6df54sdfg"
+     *     }
+     * @apiErrorExample {json} Validation Error:
+     *     HTTP/1.1 422 Unprocessable Entity
+     *     {
+     *         "errors": {
+     *             "email": ["First error", "Second error"]
+     *         }
+     *     }
+     * @apiErrorExample {json} Unauthorized
+     *      HTTP/1.1 401 Unauthorized
+     *      {
+     *          "name":"Unauthorized",
+     *          "message":"You are requesting with an invalid credential.",
+     *          "code":0,
+     *          "status":401
+     *      }
+     * @apiErrorExample {json} Forbidden
+     *      HTTP/1.1 403 Forbidden
+     *      {
+     *          "name":"Forbidden",
+     *          "message":"You are not allowed to perform this action.",
+     *          "code":0,
+     *          "status":403
+     *      }
      */
     public function actionCreate()
     {
@@ -75,8 +109,46 @@ class InviteController extends RestController
     }
 
     /**
-     * Shows all invites sent by user.
-     * @return \app\models\UserInvite[]|array
+     * @api {get} /invites Get all invites
+     * @apiVersion 1.0.0
+     * @apiGroup Invite
+     * @apiName  GetAllInvites
+     * @apiDescription Shows all invites created by current user
+     * @apiPermission Doctor|Chief
+     * @apiSuccessExample {json} Success-Response:
+     *      HTTP/1.1 200 OK
+     *      [
+     *          {
+     *              "id": "1",
+     *              "email": "test@example.com",
+     *              "created_at": "2016-05-17 18:00:00",
+     *              "registered": true,
+     *              "role": "patient"
+     *          },
+     *          {
+     *              "id": "2",
+     *              "email": "test2@example.com",
+     *              "created_at": "2016-05-17 18:50:00",
+     *              "registered": false,
+     *              "role": "patient"
+     *          }
+     *      ]
+     * @apiErrorExample {json} Unauthorized
+     *      HTTP/1.1 401 Unauthorized
+     *      {
+     *          "name":"Unauthorized",
+     *          "message":"You are requesting with an invalid credential.",
+     *          "code":0,
+     *          "status":401
+     *      }
+     * @apiErrorExample {json} Forbidden
+     *      HTTP/1.1 403 Forbidden
+     *      {
+     *          "name":"Forbidden",
+     *          "message":"You are not allowed to perform this action.",
+     *          "code":0,
+     *          "status":403
+     *      }
      */
     public function actionIndex()
     {
@@ -84,10 +156,39 @@ class InviteController extends RestController
     }
 
     /**
-     * Shows invite information.
-     * @param  int $id
-     * @return UserInvite|array|null
-     * @throws NotFoundHttpException
+     * @api {get} /invites/{id} Get invite
+     * @apiVersion 1.0.0
+     * @apiGroup Invite
+     * @apiName  GetInvite
+     * @apiDescription Shows invite
+     * @apiPermission Doctor|Chief
+     * @apiParam {Integer} id Invite's id
+     * @apiSuccessExample {json} Success-Response:
+     *      HTTP/1.1 200 OK
+     *
+     *      {
+     *          "id": "1",
+     *          "email": "test@example.com",
+     *          "created_at": "2016-05-17 18:00:00",
+     *          "registered": true,
+     *          "role": "patient"
+     *      }
+     * @apiErrorExample {json} Unauthorized
+     *      HTTP/1.1 401 Unauthorized
+     *      {
+     *          "name":"Unauthorized",
+     *          "message":"You are requesting with an invalid credential.",
+     *          "code":0,
+     *          "status":401
+     *      }
+     * @apiErrorExample {json} Forbidden
+     *      HTTP/1.1 403 Forbidden
+     *      {
+     *          "name":"Forbidden",
+     *          "message":"You are not allowed to perform this action.",
+     *          "code":0,
+     *          "status":403
+     *      }
      */
     public function actionView(int $id)
     {

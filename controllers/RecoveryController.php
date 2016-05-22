@@ -41,7 +41,22 @@ class RecoveryController extends RestController
     }
 
     /**
-     * Request password recovery.
+     * @api {post} /recovery Request recovery
+     * @apiVersion 1.0.0
+     * @apiGroup Recovery
+     * @apiName  RequestRecovery
+     * @apiDescription Creates new password recovery token and sends it by email
+     * @apiParam {String} email User's email
+     * @apiPermission Guest
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 204 No Content
+     * @apiErrorExample {json} Validation Error:
+     *     HTTP/1.1 422 Unprocessable Entity
+     *     {
+     *         "errors": {
+     *             "email": ["First error"]
+     *         }
+     *     }
      */
     public function actionRequest()
     {
@@ -50,7 +65,7 @@ class RecoveryController extends RestController
         $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
 
         if ($model->sendRecoveryMessage()) {
-            \Yii::$app->response->setStatusCode(201);
+            \Yii::$app->response->setStatusCode(204);
             return null;
         } elseif ($model->hasErrors()) {
             \Yii::$app->response->setStatusCode(422);
@@ -61,7 +76,24 @@ class RecoveryController extends RestController
     }
 
     /**
-     * Recovers user's password.
+     * @api {put} /user/password Change password
+     * @apiVersion 1.0.0
+     * @apiGroup Recovery
+     * @apiName  PasswordRecover
+     * @apiDescription Updates user's password
+     * @apiParam {String} password New password
+     * @apiParam {String} code     Recovery code
+     * @apiPermission Guest
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 204 No Content
+     * @apiErrorExample {json} Validation Error:
+     *     HTTP/1.1 422 Unprocessable Entity
+     *     {
+     *         "errors": {
+     *             "password": ["First error"],
+     *             "code": ["First error"],
+     *         }
+     *     }
      */
     public function actionRecover()
     {

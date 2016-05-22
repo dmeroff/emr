@@ -39,14 +39,28 @@ class UserController extends RestController
     }
     
     /**
-     * @api {post} /users Create new user
+     * @api {post} /users Create user
+     * @apiVersion 1.0.0
+     * @apiGroup User
+     * @apiName  CreateUser
      * @apiDescription Creates new user and returns authentication token
-     * @apiParam {String} email User's email
-     * @apiParam {String} password User's password
+     * @apiParam {String} email      User's email
+     * @apiParam {String} password   User's password
      * @apiParam {String} inviteCode User's invite code
-     * @apiName CreateUser
      * @apiPermission Guest
-     * @apiSuccess (200) {String} Authentication token for created user
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 201 Created
+     *     {
+     *       "token": "f6asd54f98asd74f6vs6df54sdfg"
+     *     }
+     * @apiErrorExample {json} Validation Error:
+     *     HTTP/1.1 422 Unprocessable Entity
+     *     {
+     *         "errors": {
+     *             "email": ["First error"],
+     *             "password": ["First error"]
+     *         }
+     *     }
      */
     public function actionCreate()
     {
