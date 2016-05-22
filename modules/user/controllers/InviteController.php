@@ -1,8 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\user\controllers;
 
-use app\models\UserInvite;
+use app\controllers\RestController;
+use app\modules\user\models\UserInvite;
 use app\rbac\Permissions;
 use yii\filters\AccessControl;
 use yii\helpers\Url;

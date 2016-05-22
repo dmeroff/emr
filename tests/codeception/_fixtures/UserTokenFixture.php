@@ -13,5 +13,5 @@ class UserTokenFixture extends ActiveFixture
     /**
      * @var string
      */
-    public $modelClass = 'app\models\UserToken';
+    public $modelClass = 'app\modules\user\models\UserToken';
 }

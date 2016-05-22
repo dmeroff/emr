@@ -1,8 +1,9 @@
 <?php
 
-namespace app\models;
+namespace app\modules\user\models;
 
-use app\query\UserInviteQuery;
+use app\modules\user\models\User;
+use app\modules\user\query\UserInviteQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
@@ -134,7 +135,7 @@ class UserInvite extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\query\UserInviteQuery the active query used by this AR class.
+     * @return \app\modules\user\query\UserInviteQuery the active query used by this AR class.
      */
     public static function find()
     {

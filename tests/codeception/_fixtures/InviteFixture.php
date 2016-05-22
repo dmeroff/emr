@@ -13,5 +13,5 @@ class InviteFixture extends ActiveFixture
     /**
      * @var string
      */
-    public $modelClass = 'app\models\UserInvite';
+    public $modelClass = 'app\modules\user\models\UserInvite';
 }

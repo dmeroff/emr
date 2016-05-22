@@ -2,7 +2,7 @@
 
 /**
  * @var $this       yii\base\View
- * @var $userInvite app\models\UserInvite
+ * @var $userInvite \app\modules\user\models\UserInvite
  */
 
 ?>

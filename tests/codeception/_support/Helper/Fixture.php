@@ -73,7 +73,7 @@ class Fixture extends Module
 
     /**
      * @param  string $name
-     * @return \app\models\User
+     * @return \app\modules\user\models\User
      * @throws \yii\base\InvalidConfigException
      */
     public function getUserFixture($name)
@@ -83,7 +83,7 @@ class Fixture extends Module
 
     /**
      * @param  string $name
-     * @return \app\models\UserToken
+     * @return \app\modules\user\models\UserToken
      * @throws \yii\base\InvalidConfigException
      */
     public function getTokenFixture($name)
@@ -93,7 +93,7 @@ class Fixture extends Module
 
     /**
      * @param  string $name
-     * @return \app\models\UserInvite
+     * @return \app\modules\user\models\UserInvite
      * @throws \yii\base\InvalidConfigException
      */
     public function getInviteFixture($name)

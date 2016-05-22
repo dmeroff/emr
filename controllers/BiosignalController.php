@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\Biosignal;
-use app\models\User;
+use app\modules\user\models\User;
 use yii\web\BadRequestHttpException;
 use yii\web\ServerErrorHttpException;
 use yii\filters\AccessControl;

@@ -1,11 +1,11 @@
 <?php
 
-namespace app\query;
+namespace app\modules\user\query;
 
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[\app\models\UserToken]].
+ * This is the ActiveQuery class for [[\app\modules\user\models\UserToken]].
  *
  * @see \app\models\UserToken
  */
@@ -40,7 +40,7 @@ class UserTokenQuery extends ActiveQuery
     
     /**
      * @inheritdoc
-     * @return \app\models\UserToken[]|array
+     * @return \app\modules\user\models\UserToken[]|array
      */
     public function all($db = null)
     {
@@ -49,7 +49,7 @@ class UserTokenQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\UserToken|array|null
+     * @return \app\modules\user\models\UserToken|array|null
      */
     public function one($db = null)
     {

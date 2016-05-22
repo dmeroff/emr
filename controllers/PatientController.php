@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\Patient;
-use app\models\User;
+use app\modules\user\models\User;
 use app\rbac\Permissions;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

@@ -1,10 +1,15 @@
 <?php
 
+use app\modules\user\UserModule;
+
 $config = [
     'id' => 'api',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
+    'modules' => [
+        'user' => UserModule::class,
+    ],
     'components' => [
         'request' => [
             'parsers' => [
@@ -31,12 +36,15 @@ $config = [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'user', 'only' => ['create']],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'invite', 'only' => ['create', 'view', 'index']],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'token', 'only' => ['create', 'delete'], 'patterns' => [
-                    'DELETE' => 'delete',
-                    'POST'   => 'create',
-                ]],
+                // user module
+                'POST users' => 'user/user/create',
+                'POST tokens' => 'user/token/create',
+                'DELETE tokens' => 'user/token/delete',
+                'POST invites' => 'user/invite/create',
+                'GET invites' => 'user/invite/index',
+                'GET invites/<id:\d+>' => 'user/invite/view',
+                'POST recovery' => 'user/recovery/request',
+                'PUT user/password' => 'user/recovery/recover',
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'test', 'only' => ['create', 'index'], 'patterns' => [
                     'GET,HEAD {id}' => 'index',
                     'POST'          => 'create',
@@ -45,8 +53,6 @@ $config = [
                 'GET organizations' => 'organization/view',
                 'PUT organizations' => 'organization/update',
                 'POST biosignals' => 'biosignal/create',
-                'POST recovery' => 'recovery/request',
-                'PUT user/password' => 'recovery/recover',
                 'GET organization-archives' => 'organization-archive/index',
                 'GET organization-archives/<id:\d+>/revision/<revision:\d+>' => 'organization-archive/view',
                 'GET patient-archives' => 'patient-archive/index',

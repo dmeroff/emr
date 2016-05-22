@@ -1,11 +1,11 @@
 <?php
 
-namespace app\query;
+namespace app\modules\user\query;
 
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[\app\models\UserInvite]].
+ * This is the ActiveQuery class for [[\app\modules\user\models\UserInvite]].
  *
  * @see \app\models\UserInvite
  */
@@ -58,7 +58,7 @@ class UserInviteQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\UserInvite[]|array
+     * @return \app\modules\user\models\UserInvite[]|array
      */
     public function all($db = null)
     {
@@ -67,7 +67,7 @@ class UserInviteQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\UserInvite|array|null
+     * @return \app\modules\user\models\UserInvite|array|null
      */
     public function one($db = null)
     {

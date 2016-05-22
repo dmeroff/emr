@@ -1,11 +1,11 @@
 <?php
 
-namespace app\query;
+namespace app\modules\user\query;
 
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[\app\models\User]].
+ * This is the ActiveQuery class for [[\app\modules\user\models\User]].
  *
  * @see \app\models\User
  */
@@ -40,7 +40,7 @@ class UserQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\User[]|array
+     * @return \app\modules\user\models\User[]|array
      */
     public function all($db = null)
     {
@@ -49,7 +49,7 @@ class UserQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\models\User|array|null
+     * @return \app\modules\user\models\User|array|null
      */
     public function one($db = null)
     {

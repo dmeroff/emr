@@ -1,6 +1,6 @@
 <?php
 
-use app\models\User;
+use app\modules\user\models\User;
 use Faker\Factory;
 use yii\db\Expression;
 

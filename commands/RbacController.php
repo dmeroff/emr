@@ -2,7 +2,7 @@
 
 namespace app\commands;
 
-use app\models\User;
+use app\modules\user\models\User;
 use app\rbac\Permissions;
 use rmrevin\yii\rbac\Command;
 use rmrevin\yii\rbac\RbacFactory;

@@ -2,7 +2,7 @@
 
 /**
  * @var $this yii\base\View
- * @var $user app\models\User
+ * @var $user \app\modules\user\models\User
  */
 
 ?>

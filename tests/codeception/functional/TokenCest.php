@@ -1,6 +1,6 @@
 <?php
 
-use app\models\UserToken;
+use app\modules\user\models\UserToken;
 use yii\helpers\Json;
 
 class TokenCest

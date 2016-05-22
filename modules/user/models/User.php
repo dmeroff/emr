@@ -1,8 +1,13 @@
 <?php
 
-namespace app\models;
+namespace app\modules\user\models;
 
-use app\query\UserQuery;
+use app\models\Doctor;
+use app\models\Organization;
+use app\models\Patient;
+use app\modules\user\models\UserInvite;
+use app\modules\user\models\UserToken;
+use app\modules\user\query\UserQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\web\IdentityInterface;
@@ -254,7 +259,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * @inheritdoc
-     * @return \app\query\UserQuery the active query used by this AR class.
+     * @return \app\modules\user\query\UserQuery the active query used by this AR class.
      */
     public static function find()
     {

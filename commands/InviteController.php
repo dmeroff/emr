@@ -2,8 +2,8 @@
 
 namespace app\commands;
 
-use app\models\User;
-use app\models\UserInvite;
+use app\modules\user\models\User;
+use app\modules\user\models\UserInvite;
 use yii\console\Controller;
 use yii\helpers\Console;
 
@@ -36,7 +36,7 @@ class InviteController extends Controller
             return 1;
         }
 
-        /** @var UserInvite $newInvite */
+        /** @var \app\modules\user\models\UserInvite $newInvite */
         $newInvite = \Yii::createObject([
             'class'    => UserInvite::class,
             'email'    => $email,

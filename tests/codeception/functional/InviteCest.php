@@ -1,7 +1,7 @@
 <?php
 
-use app\models\User;
-use app\models\UserInvite;
+use app\modules\user\models\User;
+use app\modules\user\models\UserInvite;
 use Faker\Factory;
 use yii\helpers\Json;
 

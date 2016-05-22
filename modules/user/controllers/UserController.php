@@ -1,8 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\user\controllers;
 
-use app\models\User;
+use app\controllers\RestController;
+use app\modules\user\models\User;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\ServerErrorHttpException;

@@ -1,9 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\user\controllers;
 
-use app\forms\LoginForm;
-use app\models\UserToken;
+use app\controllers\RestController;
+use app\modules\user\forms\LoginForm;
+use app\modules\user\models\UserToken;
 use yii\filters\AccessControl;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;

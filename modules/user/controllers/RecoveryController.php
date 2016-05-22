@@ -1,9 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\user\controllers;
 
-use app\forms\RecoveryRequestForm;
-use app\forms\RecoveryForm;
+use app\controllers\RestController;
+use app\modules\user\forms\RecoveryRequestForm;
+use app\modules\user\forms\RecoveryForm;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\ServerErrorHttpException;

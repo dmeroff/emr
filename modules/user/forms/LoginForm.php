@@ -1,9 +1,9 @@
 <?php
 
-namespace app\forms;
+namespace app\modules\user\forms;
 
-use app\models\User;
-use app\models\UserToken;
+use app\modules\user\models\User;
+use app\modules\user\models\UserToken;
 use yii\base\Model;
 
 /**
