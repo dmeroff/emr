@@ -66,7 +66,7 @@ class UserInvite extends ActiveRecord
      */
     public function beforeSave($insert)
     {
-        $this->code       = random_int(1000000000, 9999999999);
+        $this->code       = random_int(100000000, 999999999);
         $this->created_at = new Expression('NOW()');
 
         return parent::beforeSave($insert);
