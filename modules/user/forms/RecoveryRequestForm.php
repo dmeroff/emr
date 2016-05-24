@@ -42,7 +42,7 @@ class RecoveryRequestForm extends Model
         
         $user = User::find()->byEmail($this->email)->one();
         
-        $user->updateAttributes(['recovery_code' => random_int(1000000000, 9999999999)]);
+        $user->updateAttributes(['recovery_code' => random_int(100000000, 999999999)]);
         
         \Yii::$app->mailer->compose('recovery', ['user' => $user])
             ->setTo($user->email)
