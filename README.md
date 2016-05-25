@@ -1,5 +1,11 @@
 # Electronic medical record [![Build Status](https://travis-ci.org/dmeroff/emr.svg?branch=master)](https://travis-ci.org/dmeroff/emr)
 
+## Requirements
+
+- Composer
+- PHP 7 and higher
+- MariaDB
+
 ## Installation instructions
 
 First of all, clone the repository and then `cd` into cloned directory.
