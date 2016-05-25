@@ -3,6 +3,7 @@
 use app\modules\user\models\User;
 use app\modules\user\models\UserToken;
 use yii\db\Query;
+use yii\helpers\Json;
 
 class RegistrationCest
 {
@@ -15,7 +16,7 @@ class RegistrationCest
             'password'   => 'qwerty',
             'inviteCode' => $invite->code,
         ]);
-        $code  = trim($I->grabResponse(), '"');
+        $code = Json::decode($I->grabResponse())['token'];
         $I->canSeeResponseCodeIs(201);
 
         $user = User::find()->byEmail($invite->email)->one();
@@ -37,7 +38,7 @@ class RegistrationCest
             'password'   => 'qwerty',
             'inviteCode' => $invite->code,
         ]);
-        $code  = trim($I->grabResponse(), '"');
+        $code = Json::decode($I->grabResponse())['token'];
         $I->canSeeResponseCodeIs(201);
 
         $user = User::find()->byEmail($invite->email)->one();
@@ -60,7 +61,7 @@ class RegistrationCest
             'password'   => 'qwerty',
             'inviteCode' => $invite->code,
         ]);
-        $code  = trim($I->grabResponse(), '"');
+        $code = Json::decode($I->grabResponse())['token'];
         $I->canSeeResponseCodeIs(201);
 
         $user = User::find()->byEmail($invite->email)->one();

@@ -5,8 +5,6 @@ namespace app\modules\user\models;
 use app\modules\organization\models\Doctor;
 use app\modules\organization\models\Organization;
 use app\modules\emr\models\Patient;
-use app\modules\user\models\UserInvite;
-use app\modules\user\models\UserToken;
 use app\modules\user\query\UserQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
@@ -22,9 +20,9 @@ use yii\web\IdentityInterface;
  * @property string  $recovery_code
  * @property string  $authToken
  *
- * @property \app\modules\organization\controllers\Organization   $organization
- * @property \app\modules\emr\models\Patient        $patient
- * @property \app\modules\organization\controllers\\app\modules\organization\models\Doctor         $doctor
+ * @property Organization   $organization
+ * @property Patient        $patient
+ * @property Doctor         $doctor
  * @property UserInvite[]   $invites
  */
 class User extends ActiveRecord implements IdentityInterface
