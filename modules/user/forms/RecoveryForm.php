@@ -33,7 +33,7 @@ class RecoveryForm extends Model
     public function rules() : array
     {
         return [
-            [['password', 'code'], 'required'],
+            [['password', 'code'], 'required', 'message' => '{attribute} не может быть пустым'],
             ['password', 'string', 'min' => 6, 'max' => 72,
                 'tooShort' => 'Пароль не может быть короче 6 символов',
                 'tooLong' => 'Пароль не может быть длиннее 72 символов'],
@@ -66,5 +66,16 @@ class RecoveryForm extends Model
         $this->_user->recovery_code = null;
 
         return $this->_user->save(false);
+    }
+
+    /**
+     * @return array
+     */
+    public function attributeLabels() : array
+    {
+        return [
+            'code'     => 'Код',
+            'password' => 'Пароль',
+        ];
     }
 }

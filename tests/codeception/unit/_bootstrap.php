@@ -1,3 +1,3 @@
 <?php
 
-// add unit testing specific bootstrap code here
+new yii\web\Application(require(dirname(__DIR__) . '/config/unit.php'));
