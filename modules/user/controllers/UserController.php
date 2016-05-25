@@ -71,7 +71,7 @@ class UserController extends RestController
 
         if ($model->register()) {
             \Yii::$app->response->setStatusCode(201);
-            return $model->authToken;
+            return ['token' => $model->authToken];
         } elseif ($model->hasErrors()) {
             \Yii::$app->response->setStatusCode(422);
             return ['errors' => $model->getErrors()];
