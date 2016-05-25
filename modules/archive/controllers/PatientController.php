@@ -110,7 +110,7 @@ class PatientController extends RestController
     }
 
     /**
-     * @api {get} /archive/patients/{id}/{revision} View organization revision
+     * @api {get} /archive/patients/{id}/{revision} View patient revision
      * @apiVersion 1.0.0
      * @apiGroup Archive
      * @apiName  ViewPatientRevision
