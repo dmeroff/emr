@@ -4,6 +4,8 @@ namespace app\modules\archive\controllers;
 
 use app\controllers\RestController;
 use app\modules\archive\models\OrganizationArchive;
+use app\modules\user\models\User;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\auth\CompositeAuth;
@@ -34,6 +36,15 @@ class OrganizationController extends RestController
                 'actions' => [
                     'view'   => ['get'],
                     'index'  => ['get'],
+                ],
+            ],
+            'accessControl' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [User::ROLE_CHIEF],
+                    ],
                 ],
             ],
         ];
