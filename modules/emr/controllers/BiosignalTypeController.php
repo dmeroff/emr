@@ -37,7 +37,6 @@ class BiosignalTypeController extends RestController
                     'index'  => ['get'],
                     'update' => ['put'],
                     'view'   => ['get'],
-                    'delete' => ['delete'],
                     'create' => ['post'],
                 ],
             ],
@@ -70,27 +69,7 @@ class BiosignalTypeController extends RestController
      */
     public function actionView($id)
     {
-        $model = BiosignalType::find()->byId($id)->one();
-
-        if ($model == null) {
-            throw new NotFoundHttpException();
-        }
-
-        return $model;
-    }
-
-    /**
-     * Delete biosignal type
-     * @param $id
-     * @throws \yii\db\Exception
-     */
-    public function actionDelete($id)
-    {
-        \Yii::$app->db->createCommand()
-            ->delete('biosignal_type', ['id' => $id])
-            ->execute();
-
-        \Yii::$app->response->setStatusCode(204);
+        return $this->findModel($id);
     }
 
     /**
@@ -103,11 +82,7 @@ class BiosignalTypeController extends RestController
      */
     public function actionUpdate($id)
     {
-        $model = BiosignalType::find()->byId($id)->one();
-
-        if ($model == null) {
-            throw new NotFoundHttpException();
-        }
+        $model = $this->findModel($id);
 
         $model->load(\Yii::$app->getRequest()->getBodyParams(), '');
 
@@ -140,5 +115,20 @@ class BiosignalTypeController extends RestController
         } else {
             throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
         }
+    }
+
+    /**
+     * @return BiosignalType
+     * @throws NotFoundHttpException
+     */
+    private function findModel($id) : BiosignalType
+    {
+        $model = BiosignalType::find()->byId($id)->one();
+
+        if ($model instanceof BiosignalType) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException();
     }
 }

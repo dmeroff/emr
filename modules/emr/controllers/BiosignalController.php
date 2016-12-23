@@ -73,7 +73,7 @@ class BiosignalController extends RestController
     public function actionCreate()
     {
         $model = new Biosignal();
-        $file  = UploadedFile::getInstanceByName('data');
+        $file  = UploadedFile::getInstanceByName('binary_data');
         
         if (!($file instanceof UploadedFile)) {
             throw new BadRequestHttpException();

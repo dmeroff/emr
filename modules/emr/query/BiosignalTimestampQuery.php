@@ -16,6 +16,24 @@ class BiosignalTimestampQuery extends ActiveQuery
     }
 
     /**
+     * @param  $id
+     * @return BiosignalTimestampQuery
+     */
+    public function byPatientId($id) : BiosignalTimestampQuery
+    {
+        return $this->andWhere(['patient_id' => $id]);
+    }
+
+    /**
+     * @param int $id
+     * @return BiosignalTimestampQuery
+     */
+    public function byDoctorId(int $id) : BiosignalTimestampQuery
+    {
+        return $this->andWhere(['doctor_id' => $id]);
+    }
+
+    /**
      * @param int $id
      * @return BiosignalTimestampQuery
      */

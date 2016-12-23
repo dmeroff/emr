@@ -23,7 +23,7 @@ class m161222_155953_rework_biosignal_system extends Migration
             'doctor_id' => $this->integer(),
         ]);
 
-        $this->addForeignKey('fk_biosignal_biosignal_type', 'biosignal', 'type_id', 'biosignal_type', 'id', 'CASCADE', 'RESTRICT');
+        $this->addForeignKey('fk_biosignal_biosignal_type', 'biosignal', 'type_id', 'biosignal_type', 'id');
         $this->addForeignKey('fk_biosignal_timestamp_biosignal', 'biosignal_timestamp', 'biosignal_id', 'biosignal', 'id', 'CASCADE', 'RESTRICT');
     }
 

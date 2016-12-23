@@ -2,6 +2,7 @@
 
 namespace app\modules\organization\models;
 
+use app\modules\emr\models\PatientToDoctor;
 use app\modules\organization\query\DoctorQuery;
 use yii\db\ActiveRecord;
 
@@ -24,6 +25,14 @@ class Doctor extends ActiveRecord
     public static function find()
     {
         return new DoctorQuery(get_called_class());
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPatients()
+    {
+        return $this->hasMany('patient_to_doctor', ['patient_id' => 'id']);
     }
 
     /**

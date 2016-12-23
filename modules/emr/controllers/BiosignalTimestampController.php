@@ -3,6 +3,8 @@
 namespace app\modules\emr\controllers;
 
 use app\modules\emr\models\BiosignalTimestamp;
+use app\modules\emr\models\Patient;
+use app\modules\organization\models\Doctor;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\VerbFilter;
 use yii\filters\auth\HttpBasicAuth;
@@ -49,9 +51,9 @@ class BiosignalTimestampController extends RestController
      * @param $biosignalId
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function actionIndex($biosignalId)
+    public function actionIndex()
     {
-        return BiosignalTimestamp::find()->byBiosignalId($biosignalId)->all();
+        return BiosignalTimestamp::find()->byPatientId(Doctor::find()->byId(\Yii::$app->user->identity->doctor->id)->one()->getPatients()->column())->all();
     }
 
     /**

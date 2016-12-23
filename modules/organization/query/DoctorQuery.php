@@ -12,6 +12,15 @@ use yii\db\ActiveQuery;
 class DoctorQuery extends ActiveQuery
 {
     /**
+     * @param int $id
+     * @return DoctorQuery
+     */
+    public function byId(int $id) : DoctorQuery
+    {
+        return $this->andWhere(['id' => $id]);
+    }
+
+    /**
      * @inheritdoc
      * @return \app\modules\organization\models\Doctor[]|array
      */
