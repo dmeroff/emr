@@ -66,7 +66,7 @@ $config = [
                 'GET biosignaltypes/<id:\d+>' => 'emr/biosignal-type/view',
                 'PUT biosignaltypes/<id:\d+>' => 'emr/biosignal-type/update',
                 'DELETE biosignaltypes/<id:\d+>' => 'emr/biosignal-type/delete',
-                'GET biosignaltimestamps/biosignal/<id:\d+>' => 'emr/biosignal-type/index',
+                'GET biosignaltimestamps/biosignal/<id:\d+>' => 'emr/biosignal-timestamp/index',
                 'GET biosignaltimestamps/<id:\d+>' => 'emr/biosignal-timestamp/view',
 
                 // organization module
