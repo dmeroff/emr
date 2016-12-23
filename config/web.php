@@ -61,6 +61,11 @@ $config = [
                 'GET patients/<id:\d+>' => 'emr/patient/view',
                 'PUT patients/<id:\d+>' => 'emr/patient/update',
                 'DELETE patients/<id:\d+>' => 'emr/patient/delete',
+                'POST biosignaltypes' => 'emr/biosignal-type/create',
+                'GET biosignaltypes' => 'emr/biosignal-type/index',
+                'GET biosignaltypes/<id:\d+>' => 'emr/biosignal-type/view',
+                'PUT biosignaltypes/<id:\d+>' => 'emr/biosignal-type/update',
+                'DELETE biosignaltypes/<id:\d+>' => 'emr/biosignal-type/delete',
 
                 // organization module
                 'GET organizations' => 'organization/organization/view',
