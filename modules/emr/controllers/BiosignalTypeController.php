@@ -25,12 +25,12 @@ class BiosignalTypeController extends RestController
     public function behaviors()
     {
         return [
-            /*'authenticator' => [
+            'authenticator' => [
                 'class'       => CompositeAuth::class,
                 'authMethods' => [
                     HttpBasicAuth::class,
                 ],
-            ],*/
+            ],
             'verbFilter' => [
                 'class'   => VerbFilter::class,
                 'actions' => [
@@ -41,7 +41,7 @@ class BiosignalTypeController extends RestController
                     'create' => ['post'],
                 ],
             ],
-            /*'accessControl' => [
+            'accessControl' => [
                 'class' => AccessControl::class,
                 'rules' => [
                     [
@@ -49,7 +49,7 @@ class BiosignalTypeController extends RestController
                         'roles' => [User::ROLE_DOCTOR],
                     ],
                 ],
-            ],*/
+            ],
         ];
     }
 
